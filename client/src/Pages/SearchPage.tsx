@@ -33,7 +33,7 @@ const SearchPage = () => {
   const handleSbumit = () => {
     console.log("Submitting...");
     fetchData();
-  }
+  };
 
   useEffect(() => {
     fetchData();
@@ -41,14 +41,21 @@ const SearchPage = () => {
 
   return (
     <div>
-      <input
-        type="text"
-        placeholder="Search..."
-        name="query"
-        value={query}
-        onChange={handleQuery}
-      />
-      <button onClick={handleSbumit}>Search</button>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          fetchData();
+        }}
+      >
+        <input
+          type="text"
+          placeholder="Search..."
+          name="query"
+          value={query}
+          onChange={handleQuery}
+        />
+        <button onClick={handleSbumit}>Search</button>
+      </form>
 
       <div className="card">
         {snips.map((snip, index) => (
