@@ -1,26 +1,37 @@
 function preprocess(text) {
-  if(text !== undefined)
-  return text
-    .toLowerCase()
-    .replace(/[^a-z\s]/g, "") // Remove non-alphabetic characters
-    .split(/\s+/); // Split by spaces into tokens
+  if (text !== undefined)
+    return text
+      .toLowerCase()
+      .replace(/[^a-z\s]/g, "") // Remove non-alphabetic characters
+      .split(/\s+/); // Split by spaces into tokens
 }
 
 function calculateTF(document) {
   const words = preprocess(document);
   const termFrequency = {};
+  const totalWords = words.length;
 
-  words.forEach((word) => {
-    if (termFrequency[word]) {
-      termFrequency[word] += 1;
-    } else {
-      termFrequency[word] = 1;
+  words.forEach((word, index) => {
+    if (word) {
+      // Calculate position score (1 for the first word, 0 for the last word)
+      const positionScore = (totalWords - index) / totalWords;
+
+      // Calculate weighted frequency based on position
+      if (termFrequency[word]) {
+        termFrequency[word] += positionScore;
+      } else {
+        termFrequency[word] = positionScore;
+      }
     }
   });
 
-  // Convert counts to frequencies
+  // Convert counts to frequencies by normalizing with the sum of all position scores
+  const totalPositionScores = Object.values(termFrequency).reduce(
+    (sum, val) => sum + val,
+    0
+  );
   for (let word in termFrequency) {
-    termFrequency[word] /= words.length;
+    termFrequency[word] /= totalPositionScores;
   }
 
   return termFrequency;
