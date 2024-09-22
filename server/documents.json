@@ -1,0 +1,912 @@
+[
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Flutter Login and SignUp.md",
+    "lang": "shell",
+    "code": "npm install -g firebase-tools"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Flutter Login and SignUp.md",
+    "lang": "shell",
+    "code": "dart pub global activate flutterfire_cli"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Flutter Login and SignUp.md",
+    "lang": "shell",
+    "code": "flutter pub add firebase_core\nflutter pub add firebase_auth\nflutter pub add firebase_ui_auth"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Flutter Login and SignUp.md",
+    "lang": "dart",
+    "code": "void main() async {\n WidgetsFlutterBinding.ensureInitialized();\n await Firebase.initializeApp(\n   options: DefaultFirebaseOptions.currentPlatform,\n );\n\n\n runApp(const MyApp());\n}"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Git Authentication.md",
+    "lang": "shell",
+    "code": "git config --global user.name \"Segun Ajibola\""
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Git Authentication.md",
+    "lang": "shell",
+    "code": "git config --global user.email \"youremail@gmail.com\""
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Git Authentication.md",
+    "lang": "shell",
+    "code": "ls -al ~/.ssh"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Git Authentication.md",
+    "lang": "shell",
+    "code": "ssh-keygen -t ed25519 -C \"your_email@example.com\""
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Git Authentication.md",
+    "lang": "",
+    "code": "Get-Service -Name ssh-agent | Set-Service -StartupType Manual\nStart-Service ssh-agent"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Git Authentication.md",
+    "lang": "shell",
+    "code": "ssh-add <path to private key>"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Git Merge commit (rebase).md",
+    "lang": "",
+    "code": "git pull --rebase"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Git Merge commit (rebase).md",
+    "lang": "",
+    "code": "git rebase --abort"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Java Java-Beyond-Basics 22-7-Lambda-Stream-Properties.md",
+    "lang": "java",
+    "code": "@FunctionalInterface\ninterface Operation{\n\t//Abstract Functional Method providing definition of lambda expression\n\tpublic double calculations(double num1,double num2); \n}\n//Defining a lambda expression of type Operation\nOperation doAdd  =  (double x, double y)-> x+y;"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Java Java-Beyond-Basics 22-7-Lambda-Stream-Properties.md",
+    "lang": "java",
+    "code": "interface Operation {\n\tpublic double opCriteria(double firstNum, double secondNum);\n}\n\npublic static void main(String[] args) {\n\t\t\n\tOperation add = (x,y) -> x+y;\n\tOperation subtract = (x,y) -> x-y;\n\tOperation multiply = (x,y) -> x*y;\n\tOperation divide = (x,y) -> x/y;\n\t\t\n\t\n\tSystem.out.println(\"Result is: \"+doOperation(12, 4, multiply));\n}\n\npublic static double doOperation(double firstNum, double secondNum, Operation operator) {\n\treturn operator.opCriteria(firstNum, secondNum);\n}"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Java Java-Beyond-Basics 22-7-Lambda-Stream-Properties.md",
+    "lang": "java",
+    "code": "List<String> strArr = List.of(\"Tyson\", \"Kai\", \"Max\", \"Ray\", \"Daichi\");//List.of() returns immutable list of String with mentioned values\nstrArr.forEach(s -> System.out.println(s));                           //Printing List Using Lambda Expression\n\nstrArr.forEach(System.out::println); // Consice"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Java Java-Beyond-Basics 22-7-Lambda-Stream-Properties.md",
+    "lang": "java",
+    "code": "List<String> castList = List.of(\"Sam\",\"Dean\",\"Castiel\",\"Crowley\");\nStream<String> supernatural = castList.stream();"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Java Java-Beyond-Basics 22-7-Lambda-Stream-Properties.md",
+    "lang": "java",
+    "code": "Integer[] array = {672, 340, 999};\nStream<Integer> stream = Arrays.stream(array);"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Java Java-Beyond-Basics 22-7-Lambda-Stream-Properties.md",
+    "lang": "java",
+    "code": "Stream<Integer> stream = Stream.of(672, 340, 999);"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Java Java-Beyond-Basics 22-7-Lambda-Stream-Properties.md",
+    "lang": "",
+    "code": "USERNAME=vizz\nPASSWORD=root\nSERVER_URL=https://localhost:5002/\nLOGIN_SUCCESS=Successfully logged in!"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Java Java-Beyond-Basics 22-7-Lambda-Stream-Properties.md",
+    "lang": "java",
+    "code": "Configurations configurations = new Configurations();\nPropertiesConfiguration config = configurations.properties(\"configuration.properties\");"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Java Java-Beyond-Basics 22-7-Lambda-Stream-Properties.md",
+    "lang": "java",
+    "code": "Iterator<String> keys = proConfig.getKeys();\n\nwhile(keys.hasNext()) {\n\tsout(proConfig.getProperty(keys.next()));\n}"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Java Java-Beyond-Basics 22-7-Lambda-Stream-Properties.md",
+    "lang": "",
+    "code": "#Name of the properties file\nname=LoggerConfigFile\n\n#Declaring logger\nrootLogger.level=info\nrootLogger.appenderRef.file.ref=LoggerAppender\n\n#File Appender\nappender.file.name=LoggerAppender\nappender.file.type=File\nappender.file.fileName=log/ErrorLog.log\n\n#Loggin pattern (Layout)\nappender.file.layout.type=PatternLayout\nappender.file.layout.pattern=%d{dd-MM-yyyy HH:mm:ss} %level - %m%n"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Java Java-Beyond-Basics 22-7-Lambda-Stream-Properties.md",
+    "lang": "java",
+    "code": "import org.apache.commons.logging.Log;\nimport org.apache.commons.logging.LogFactory;\n\npublic class UserAuthentication {\t\n\tLog logger = LogFactory.getLog(UserAuthentication.class);\n}"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Java Java-Beyond-Basics 22-7-Lambda-Stream-Properties.md",
+    "lang": "java",
+    "code": "import org.apache.logging.log4j.LogManager;\nimport org.apache.logging.log4j.Logger;\n\npublic class App {\n\tprotected static final Logger logger = LogManager.getLogger();\n\n}"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Java Java-Beyond-Basics 23-7-Junit-Lombox-Threads.md",
+    "lang": "xml",
+    "code": "<dependency>\n    <groupId>org.projectlombok</groupId>\n    <artifactId>lombok</artifactId>\n    <version>1.18.28</version>\n    <scope>provided</scope>\n</dependency>"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Java Java-Beyond-Basics 23-7-Junit-Lombox-Threads.md",
+    "lang": "java",
+    "code": "class MyThread extends Thread {\n\t\n\t@Override\n\tpublic void run() {\n\t\tSystem.out.println(\"Thread created\");\n\t}\n\t\n}\n\npublic class MultiThreading {\n\n\tpublic static void main(String[] args ) {\n\t\tThread t = new MyThread();\n\t\t\n\t\tt.start();\n\t}\n\t\n}"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Java Java-Beyond-Basics 23-7-Junit-Lombox-Threads.md",
+    "lang": "java",
+    "code": "class MyThread implements Runnable {\n\t@Override\n\tpublic void run() {\n\t\tSystem.out.println(\"Thread created\");\n\t}\n}\n\npublic class MultiThreading {\n\tpublic static void main(String[] args ) {\n\t\tRunnable t = new MyThread();\n\t\tt.run();\n\t}\n\t\n}"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Java Java-Beyond-Basics 23-7-Junit-Lombox-Threads.md",
+    "lang": "java",
+    "code": "Runnable t = () -> {System.out.println(\"Thread created\");};\nt.run();"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Java Java-Beyond-Basics 23-7-Junit-Lombox-Threads.md",
+    "lang": "java",
+    "code": "Runnable t = () -> {System.out.println(\"Thread created\");};\n\nThread t = new Thread(t);"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Java Java-Beyond-Basics 23-7-Junit-Lombox-Threads.md",
+    "lang": "java",
+    "code": "synchronized(sync_object)\n{\n   // Access shared variables and other\n   // shared resources\n}"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Java Java-Beyond-Basics 23-7-Junit-Lombox-Threads.md",
+    "lang": "java",
+    "code": "package com.infy.thread;\npublic class ThreadGroupDemo {\n\tpublic static void main(String[] args) {\n\t\tThreadGroup threadGroup = new ThreadGroup(\"ThreadGroup\");\n\t\tRunnable r = () -> System.out.println(\"Thread created is :\"+Thread.currentThread().getName());\n\t\tvar t1 = new Thread(threadGroup,r,\"one\");\n\t\tvar t2 = new Thread(threadGroup,r,\"two\");\n\t\tvar t3 = new Thread(threadGroup,r,\"three\");\n\t\tt1.start();\n\t\tt2.start();\n\t\tt3.start();\n\t\tSystem.out.println(\"Thread Group Name: \"+threadGroup.getName());\n\t\tthreadGroup.list();\n\t}\n}"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Java Java-Beyond-Basics 23-7-Junit-Lombox-Threads.md",
+    "lang": "java",
+    "code": "public static void main(String[] args) \n    { \n        // creates five tasks \n        Runnable r1 = new Task(\"task 1\"); \n        Runnable r2 = new Task(\"task 2\"); \n        Runnable r3 = new Task(\"task 3\"); \n        Runnable r4 = new Task(\"task 4\"); \n        Runnable r5 = new Task(\"task 5\");       \n          \n        // creates a thread pool with MAX_T no. of  \n        // threads as the fixed pool size(Step 2) \n        ExecutorService pool = Executors.newFixedThreadPool(MAX_T);   \n         \n        // passes the Task objects to the pool to execute (Step 3) \n        pool.execute(r1); \n        pool.execute(r2); \n        pool.execute(r3); \n        pool.execute(r4); \n        pool.execute(r5);  \n          \n        // pool shutdown ( Step 4) \n        pool.shutdown();     \n    }"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Java Java-Beyond-Basics 23-7-Junit-Lombox-Threads.md",
+    "lang": "java",
+    "code": "public class FutureExample {\n    public static void main(String[] args) throws InterruptedException, ExecutionException {\n        ExecutorService executorService = Executors.newSingleThreadExecutor();\n        \n        // Submit a task and obtain a Future object\n        Future<String> future = executorService.submit(() -> {\n            Thread.sleep(2000);\n            return \"Hello, Future!\";\n        });\n        \n        // Perform other tasks while the computation is in progress\n        \n        // Wait for the result and retrieve it\n        String result = future.get();\n        System.out.println(result);\n        \n        // Shutdown the executor service\n        executorService.shutdown();\n    }\n}"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Java Java-Beyond-Basics 23-7-Junit-Lombox-Threads.md",
+    "lang": "java",
+    "code": "ExecutorService executorService = Executors.newSingleThreadExecutor();\n\nSet<Callable<String>> callables = new HashSet<Callable<String>>();\n\ncallables.add(new Callable<String>() {\n    public String call() throws Exception {\n        return \"Task 1\";\n    }\n});\ncallables.add(new Callable<String>() {\n    public String call() throws Exception {\n        return \"Task 2\";\n    }\n});\ncallables.add(new Callable<String>() {\n    public String call() throws Exception {\n        return \"Task 3\";\n    }\n});\n\nString result = executorService.invokeAny(callables);\n\nSystem.out.println(\"result = \" + result);\n\nexecutorService.shutdown();"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Java Java-Beyond-Basics 23-7-Junit-Lombox-Threads.md",
+    "lang": "java",
+    "code": "ExecutorService executorService = Executors.newSingleThreadExecutor();\n\nSet<Callable<String>> callables = new HashSet<Callable<String>>();\n\ncallables.add(new Callable<String>() {\n    public String call() throws Exception {\n        return \"Task 1\";\n    }\n});\ncallables.add(new Callable<String>() {\n    public String call() throws Exception {\n        return \"Task 2\";\n    }\n});\ncallables.add(new Callable<String>() {\n    public String call() throws Exception {\n        return \"Task 3\";\n    }\n});\n\nList<Future<String>> futures = executorService.invokeAll(callables);\n\nfor(Future<String> future : futures){\n    System.out.println(\"future.get = \" + future.get());\n}\n\nexecutorService.shutdown();"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Java Java-Beyond-Basics 23-7-Junit-Lombox-Threads.md",
+    "lang": "java",
+    "code": "public interface Callable<V> {\n    /**\n     * Computes a result, or throws an exception if unable to do so.\n     *\n     * @return computed result\n     * @throws Exception if unable to compute a result\n     */\n    V call() throws Exception;\n}"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Java Java-Beyond-Basics 24-7-JDBC.md",
+    "lang": "java",
+    "code": "static final String JDBC_DRIVER = \"com.mysql.cj.jdbc.Driver\";\r\n\r\n//Load driver class\r\nClass.forName(JDBC_DRIVER);\r\n\r\n//Create connection\r\nstatic final String DB_URL = \"jdbc:mysql://localhost:3306/jdbc_demo\";\r\nstatic final String USER = \"root\";\r\nstatic final String PASS = \"infy\";\r\nConnection connection = null;\r\nconnection = DriverManager.getConnection(DB_URL, USER, PASS);\r\n\r\n//Create Statement\r\nStatement statement = connection.createStatement();\r\n\r\n//Execute statement\r\nString sql = \"select * from employee\";\r\n\r\nResultSet resultSet = statement.executeQuery(sql);"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Java Java-Beyond-Basics 24-7-JDBC.md",
+    "lang": "java",
+    "code": "ResultSet resultSet = statement.executeQuery(sql);\r\n\r\n\r\nwhile(resultSet.hasNext()) {\r\n\tString id = resultSet.getInt(1);\r\n\tString Name  = resultSet.getString(2);\r\n\tString param3 = result.getInt(3);\r\n\t\r\n\tsout(...);\r\n\tresultSet.next();\r\n}"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Java Java-Essentials 17-7-Basics-Switch-Strings.md",
+    "lang": "java",
+    "code": "class Vehicle {}\t//( is-a relationship )\r\nclass Wheel {}\t\t//( has-a relationship)\r\nclass Petrol {}\t\t//( uses-a relationship)\r\n\r\nclass Car extends Vehicle {\r\n\tWheel wheel = new Wheel();\r\n\r\n\tvoid method2(Petrol petrol) {\r\n\t\t\r\n\t}\r\n}"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Java Java-Essentials 17-7-Basics-Switch-Strings.md",
+    "lang": "java",
+    "code": "int programmingLanguage = 1;\r\nString languageName = switch (programmingLanguage) {\r\n   case 1 -> “Java”;\r\n   //…\r\n};"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Java Java-Essentials 17-7-Basics-Switch-Strings.md",
+    "lang": "java",
+    "code": "int programmingLanguage = 1;\r\nString languageName;\r\nswitch (programmingLanguage) {\r\n   case 1:\r\n      languageName  = \"Java\";\r\n      break;\r\n   case 2:\r\n      //...\r\n}"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Java Java-Essentials 17-7-Basics-Switch-Strings.md",
+    "lang": "java",
+    "code": "StringBuilder name = new StringBuilder();\r\nname.append(\"Oliver\");\r\nname.append(\" Carter\");\r\nSystem.out.println(name);   //Output: Oliver Carter"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Java Java-Essentials 17-7-Basics-Switch-Strings.md",
+    "lang": "java",
+    "code": "for (int[] arr : array) {\r\n\tfor (int ele : arr) {\r\n\t\tsout(ele + \" \");\t\r\n\t}\r\n\tsout(\"\\n\");\r\n}"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Java Java-Essentials 17-7-Basics-Switch-Strings.md",
+    "lang": "java",
+    "code": "enum PizzaSize {\r\n    SMALL, MEDIUM, LARGE;\r\n}"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Java Java-Essentials 19-7-Exceptions-Collections.md",
+    "lang": "java",
+    "code": "try {\r\n    // Code that can throw exceptions\r\n}\r\ncatch(Exception1 exception1) {\r\n    // Code for handling Exception1\r\n}\r\ncatch(Exception2 exception2) {\r\n    // Code for handling Exception2\r\n}"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Java Java-Essentials 19-7-Exceptions-Collections.md",
+    "lang": "java",
+    "code": "public static void checkStock(int stockAvailable, int quantityRequired) {\r\n    try {      \r\n        if(stockAvailable < quantityRequired)\r\n            throw new Exception(\"There is not enough stock available.\");\r\n        System.out.println(\"Please proceed to the check-out\");   \r\n    }\r\n    catch(Exception e) {\r\n        System.out.println(e.getMessage());\r\n    }\r\n}"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Java Java-Essentials 19-7-Exceptions-Collections.md",
+    "lang": "java",
+    "code": "class SampleResource implements AutoCloseable {\r\n      public String name;\r\n      public SampleResource(String name) {\r\n            this.name = name;\r\n      }\r\n      @Override\r\n      public void close() throws IOException {\r\n            System.out.println(\"Closing resource : \" + name);\r\n      }\r\n}\r\npublic class Testers {\r\n      public static void main(String[] args) throws IOException {\r\n            try (SampleResourceresource = new SampleResource(\"Sample Resource\")) {\r\n                  System.out.println(\"Started Using resource : \" + resource.name);\r\n            } catch (IOException e) {\r\n                  System.out.println(e.getMessage());\r\n            }\r\n      }\r\n}"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Java Java-Essentials 19-7-Exceptions-Collections.md",
+    "lang": "java",
+    "code": "ListIterator<String> literator = nameList.listIterator();\r\n\t\t\r\n//iterating in forward direction\r\nwhile(literator.hasNext()) {\r\n\tSystem.out.println(literator.next());\r\n}\t\t\t\r\n//iterating in reverse direction\r\nwhile(literator.hasPrevious()) {\r\n\tSystem.out.println(literator.previous());\r\n}"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Java Java-Essentials 19-7-Exceptions-Collections.md",
+    "lang": "java",
+    "code": "class Sortbyroll implements Comparator<Student> {\r\n \r\n    // Method\r\n    // Sorting in ascending order of roll number\r\n    public int compare(Student a, Student b)\r\n    {\r\n \r\n        return a.rollno - b.rollno;\r\n    }\r\n}"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records JS Numbers.md",
+    "lang": "js",
+    "code": "const lotsOfDecimal = 1.766584958675746364;\nlotsOfDecimal;\nconst twoDecimalPlaces = lotsOfDecimal.toFixed(2);\ntwoDecimalPlaces; // 1.77"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records JS Numbers.md",
+    "lang": "js",
+    "code": "let myNumber = \"51\";\nmyNumber = Number(myNumber) + 1; // 52"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Rust 1.Hello world.md",
+    "lang": "rust",
+    "code": "fn main() {\n\tprintln!(\"Hello world\")\n}"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Rust 2.Cargo.md",
+    "lang": "shell",
+    "code": "cargo new <project name>\ncargo build\ncargo run\ncargo check\ncargo build --release\ncargo build #initializing project"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Rust 2.Cargo.md",
+    "lang": "",
+    "code": "cargo new <project name>"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Rust 2.Cargo.md",
+    "lang": "",
+    "code": "cargo build"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Rust 3.Variables.md",
+    "lang": "rust",
+    "code": "const THREE_HOURS_IN_SECONDS: u32 = 60 * 60 * 3;"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Rust 4.Data Types.md",
+    "lang": "rust",
+    "code": "fn main() {\n    let c = 'z';\n    let z: char = 'ℤ'; // with explicit type annotation\n    let heart_eyed_cat = '😻';\n}"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Rust 4.Data Types.md",
+    "lang": "rust",
+    "code": "let tup: (i32, f64, u8) = (500, 6.4, 1);"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Rust 4.Data Types.md",
+    "lang": "rust",
+    "code": "let (x, y, z) = tup;"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Rust 4.Data Types.md",
+    "lang": "rust",
+    "code": "let first = tup.0;\nlet second = tup.1;"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Rust 5.Functions.md",
+    "lang": "rust",
+    "code": "fn another_function(x: i32) {}"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Rust 5.Functions.md",
+    "lang": "rust",
+    "code": "fn five() -> i32 {\n\t5\n}"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Spring API 8-5-Security.md",
+    "lang": "xml",
+    "code": "<dependency>\r\n   <groupId>org.springframework.boot</groupId>\r\n   <artifactId>spring-boot-starter-validation</artifactId>\r\n</dependency>"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Spring API 8-5-Security.md",
+    "lang": "java",
+    "code": "public class CustomerDTO {   \r\n    private Integer customerId;\r\n\t\r\n    @Email(message = \"{customer.emailid.invalid}\")\r\n    @NotNull(message = \"{customer.emailid.absent}\") \r\n    private String emailId;\r\n\t\r\n    @NotNull(message = \"{customer.name.absent}\")\r\n    @Pattern(regexp=\"[A-Za-z]+( [A-Za-z]+)*\", message=\"{customer.name.invalid}\")\r\n\tprivate String name;\r\n    \r\n    @PastOrPresent(message = \"customer.dob.invalid\")\r\n\tprivate LocalDate dateOfBirth;\r\n    //getter and setter\r\n}"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Spring API 8-5-Security.md",
+    "lang": "",
+    "code": "customer.emailid.absent=Please provide email address\r\ncustomer.emailid.invalid=Please provide valid email address\r\ncustomer.name.absent=Please provide customer name\r\ncustomer.name.invalid=Name should contain only alphabets and space\r\ncustomer.dob.invalid=Date of birth should be past or present date"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Spring API 8-5-Security.md",
+    "lang": "java",
+    "code": "@PostMapping(value = \"/customers\")\r\npublic ResponseEntity<String> addCustomer(@Valid @RequestBody CustomerDTO customerDTO) throws InfyBankException  {\r\n   //rest of the code\r\n}"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Spring Persistence layer 29-7-persistence-layer.md",
+    "lang": "java",
+    "code": "public interface CustomerRepository extends CRUDRepository<T, ID> {\r\n}"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Spring Persistence layer 29-7-persistence-layer.md",
+    "lang": "xml",
+    "code": "<dependency>\r\n  <groupId>org.modelmapper</groupId>\r\n  <artifactId>modelmapper</artifactId>\r\n  <version>3.0.0</version>\r\n</dependency>"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Spring Persistence layer 29-7-persistence-layer.md",
+    "lang": "java",
+    "code": "ModelMapper mapper = new ModelMaper();\r\nCustomerDTO customerDto = mapper.map(customer, CustomreDTO.class);"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Spring Persistence layer 30-7-JPQL.md",
+    "lang": "java",
+    "code": "@Query(\"SELECT c FROM Customer c WHERE c.emailId = :emailId AND c.name = :name\")\r\nString findNameByEmailId(@Param(\"emailId\") String emailId, String name);"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Spring Persistence layer 30-7-JPQL.md",
+    "lang": "java",
+    "code": "@Query(\"SELECT c FROM Customer c WHERE c.emailId = ?1\")\r\nString findNameByEmailId(String emailId);"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Spring Persistence layer 30-7-JPQL.md",
+    "lang": "java",
+    "code": "@Query(\"UPDATE Customer c SET c.emailId = :emailId WHERE c.customerId = :customerId\")\r\n@Modifying\r\n@Transactional\r\nInteger updateCustomerEmailId(@Param(\"emailId\") String updateCustomerByEmailId, @Param(\"customerId\") Integer customerId);"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Spring Persistence layer 30-7-JPQL.md",
+    "lang": "java",
+    "code": "@Entity\r\n@Table(name=\"customer\")\r\n@NamedQuery(name=\"Customer.findNameByEmailId\", query=\"SELECT c.name FROM Customer c WHERE c.emailId = :emailId\")\r\npublic class Customer {\r\n\t@Id\r\n\tprivate Integer customerId;\r\n\tprivate String emailId;\r\n\tprivate String name;\r\n\tprivate LocalDate dateOfBirth;\r\n\t@Enumerated(value=EnumType.STRING)\r\n\tprivate CustomerType customerType;\r\n    // getter and setter methods\r\n}"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Spring Persistence layer 30-7-JPQL.md",
+    "lang": "java",
+    "code": "public interface CustomerRespository extends CrudRepository<Customer, Integer>{\r\n\tString findNameByEmailId(@Param(\"emailId\") String emailId); \r\n}"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Spring Persistence layer 30-7-JPQL.md",
+    "lang": "",
+    "code": "@Query(\"UPDATE Customer c SET c.emailId = :emailId WHERE c.customerName = :name\")\r\n@Modifying\r\n@Transcational\r\npublic void updateCustomerEmailIdByName(@Param(emailId) String email, String name);"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Spring Persistence layer 30-7-JPQL.md",
+    "lang": "java",
+    "code": "LocalDate transactionDate = LocalDate.of(1996, 1, 29);\r\n\r\nSort sort = Sort.by(\"transactionDate\");\r\n\r\nPageable pageable = PageRequest.of(0,2,sort);\r\n\r\nList<Transaction> transactionList = transactionRepository.findByTransactionDateAfter(transactionDate, pageable);"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Spring Persistence layer 31-7-keyGen-relationships.md",
+    "lang": "sql",
+    "code": "CREATE TABLE customer (\r\n\tcustomer_id int AUTO_INCREMENT,\r\n\temail_id varchar(20),\r\n\tname varchar(10),\r\n\tdate_of_birth date,\r\n\tconstraint ps_customer_id_pk primary key (customer_id)\r\n);"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Spring Persistence layer 31-7-keyGen-relationships.md",
+    "lang": "java",
+    "code": "@Entity\r\npublic class Customer{\r\n\t@Id\r\n\t@GeneratedValue(strategy=GenerationType.IDENTITY)\r\n\tprivate Integer customerId;\r\n\t\r\n    // rest of the code\r\n}"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Spring Persistence layer 31-7-keyGen-relationships.md",
+    "lang": "sql",
+    "code": "create table address(\r\n\taddress_id int ,\r\n\tstreet varchar(30) not null,\r\n\tcity varchar(10) not null,\r\n\tconstraint ps_addressid_pk primary key (address_id)\r\n);\r\n\r\ncreate table customer (\r\n\tcustomer_id int auto_increment,\r\n\taddress_id int unique,\r\n\temailid varchar(25) not null,\r\n\tname varchar(10) not null,\r\n\tdate_of_birth date not null,\r\n\tconstraint ps_customerid_pk primary key (customer_id),\r\n\tconstraint ps_customer_address_fk foreign key(address_id) references address(address_id)\r\n);"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Spring Persistence layer 31-7-keyGen-relationships.md",
+    "lang": "java",
+    "code": "@Entity\r\npublic class Customer {\r\n\t@Id\r\n\t@GeneratedValue(strategy=GenerationType.IDENTITY)\r\n\tprivate Integer customerId;\r\n\tprivate String emailId;\r\n\tprivate String name;\r\n\tprivate LocalDate dateOfBirth;\r\n\t@OneToOne(cascade = CascadeType.ALL)\r\n\t@JoinColumn(name = \"address_id\", unique = true)\r\n\tprivate Address address;\r\n\t//getter and setter\r\n}"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Spring Service layer 25-7-Spring.md",
+    "lang": "xml",
+    "code": "<dependency>\r\n\t<groupId>org.springframework</groupId>\r\n\t<artifactId>spring-context</artifactId>\r\n\t<version>6.1.11</version>\r\n</dependency>"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Spring Service layer 25-7-Spring.md",
+    "lang": "java",
+    "code": "@Configuration\r\npublic class SpringConf{\r\n\t\r\n\t@Bean\r\n\tpublic CusotmerLoginRepository customerLoginRepository() {\r\n\t\treturn new CustomreLoginRespositoryImpl();\r\n\t}\r\n\r\n\t@Bean(name=\"customerService\")\r\n\tpublic CustomLoginService customerLoginService() {\r\n\t\treturn new CustomLoginServiceImpl(customerLoginRepository());\r\n\t}\r\n}"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Spring Service layer 25-7-Spring.md",
+    "lang": "java",
+    "code": "public class CustomerLoginController {\r\n\r\n\tCustomerLoginService customerLoginService;\r\n\r\n\tpsvm() {\r\n\t\tApplicationContext context = new AnnotationConfigApplicationContext(SpringConf.class);\r\n\t\t\r\n\t\tcustomerLoginService = context.getBean(CustomerLoginServiceImple.class);\r\n\r\n\t\t//Getting bean using custom name\r\n\t\tcustomerLoginService = (CustomerLoginServiceImpl) context.getBean(\"customerService\");\r\n\t}\r\n}"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Spring Service layer 25-7-Spring.md",
+    "lang": "java",
+    "code": "@Configuration\r\n@ComponentScan(basePackages=\"com.infy.repository com.infy.service com.infy.controller\")\r\npublic class SpringConf{\r\n\t\r\n}"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Spring Service layer 25-7-Spring.md",
+    "lang": "java",
+    "code": "public class CustomerLoginController {\r\n\r\n\tCustomerLoginService customerLoginService;\r\n\r\n\tpsvm() {\r\n\t\tApplicationContext context = new AnnotationConfigApplicationContext(SpringConf.class);\r\n\t\t\r\n\t\tcustomerLoginService = context.getBean(CustomerLoginServiceImple.class);\r\n\r\n\t\t//Getting bean using custom name\r\n\t\tcustomerLoginService = (CustomerLoginServiceImpl) context.getBean(\"customerService\");\r\n\t}\r\n}"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Spring Service layer 25-7-Spring.md",
+    "lang": "java",
+    "code": "ApplicationContext context = new AnnotationConfigApplicationContext(SpringConf.class);\r\n\r\nEnvironment environment = context.getEnvironment()\r\n\r\nenvironment.getProperty(\"some.proprety\");"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Spring Service layer 26-7-SpringBoot.md",
+    "lang": "java",
+    "code": "package com.infy;\r\nimport org.springframework.boot.SpringApplication;\r\nimport org.springframework.boot.autoconfigure.SpringBootApplication;\r\n@SpringBootApplication\r\npublic class DemoSpringBootApplication  {\r\n\t\r\n\tpublic static void main(String[] args) {\r\n\t\tSpringApplication.run(DemoSpringBootApplication.class, args);\r\n\t}\r\n}"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Spring Service layer 26-7-SpringBoot.md",
+    "lang": "xml",
+    "code": "<dependency>\r\n\t<groupId>org.springframework.boot</groupId>\r\n\t<artifactId>spring-boot-starter-log4j2</artifactId>\r\n</dependency>"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Spring Service layer 26-7-SpringBoot.md",
+    "lang": "java",
+    "code": "<dependency>\r\n    <groupId>org.springframework.boot</groupId>\r\n    <artifactId>spring-boot-starter-aop</artifactId>\r\n</dependency>"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Spring Service layer 26-7-SpringBoot.md",
+    "lang": "xml",
+    "code": "<dependency>\r\n\t\t\t<groupId>org.springframework.boot</groupId>\r\n\t\t\t<artifactId>spring-boot-starter</artifactId>\r\n\t\t\t<exclusions>\r\n\t\t\t\t<exclusion>\r\n\t\t\t\t\t<groupId>org.springframework.boot</groupId>\r\n\t\t\t\t\t<artifactId>spring-boot-starter-logging</artifactId>\r\n\t\t\t\t</exclusion>\r\n\t\t\t</exclusions>\r\n\t\t</dependency>"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Spring Service layer 26-7-SpringBoot.md",
+    "lang": "java",
+    "code": "@Component\r\n@Aspect\r\npublic class LoggingAspect {\r\n\r\n    private static final Log LOGGER = LogFactory.getLog(BootDemoApplication.class);\r\n\r\n}"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records UI HTML 14-8.md",
+    "lang": "html",
+    "code": "<form name=\"Name of the form\" action=\"Link to server-side program\" method=\"HTTP Request method\" target=\"Where to display the response\">\r\n    <!-- All the form elements will come here-->\r\n</form>"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records UI HTML 14-8.md",
+    "lang": "html",
+    "code": "<input type=\"input-type\" value=\"element-value\"/>"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records UI HTML 14-8.md",
+    "lang": "html",
+    "code": "<label for=\"emailId\">Email ID</label>\r\n <br>\r\n <input type=\"email\" name=\"emailId\" id=\"emailId\">"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records UI React 0.md",
+    "lang": "ts",
+    "code": "const [formState, setFormState] = useState<State>({\r\n    email: \"\",\r\n    password: \"\",\r\n    message: \"\",\r\n    textStyle: \"\"\r\n});\r\n\r\nsetFormState((prev) => ({...prev, message: \"Login success\", textStyle: \"success\"}));"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records UI React 0.md",
+    "lang": "ts",
+    "code": "setFormState((prev) => ({...prev, message: \"Login success\", textStyle: \"success\"}));\r\nsetFormState((prev) => {return {...prev, message: \"Login success\", textStyle: \"success\"}});"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records UI React 0.md",
+    "lang": "tsx",
+    "code": "{\r\n    array && // check for null\r\n    array.lenght > 0 && // logic of canditional rendering\r\n    array.map(() => {...}); // displaying\r\n}"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records UI React 0.md",
+    "lang": "ts",
+    "code": "const itemsList = items; // copies reference\r\nconst itemsList = [...items] // copies values"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records UI React 0.md",
+    "lang": "ts",
+    "code": "// This will not work\r\nsetItems((items) => {\r\n    items[index].quantity = quantity;\r\n    return items\r\n});\r\n\r\n//Do this:\r\nconst itemsList = [...items];\r\nitemsList[index].quantity = quantity;\r\n\r\nsetItems(itemsList);"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records UI React 1-.md",
+    "lang": "ts",
+    "code": "const HomePage = () => {\r\n    return (\r\n        <div>\r\n            HomePage\r\n        </div>\r\n    );\r\n}\r\n\r\nexport default HomePage;"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records UI React 1-.md",
+    "lang": "ts",
+    "code": "export default class Footer extends Component {\r\n    render() {\r\n        return (\r\n            <>\r\n            Footer\r\n            </>\r\n        )\r\n    }\r\n}"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records UI React 1-.md",
+    "lang": "ts",
+    "code": "type Props = {\r\n    info: number;\r\n};\r\n\r\nconst Resultant: React.FC<Props> = (data) => {\r\n    return (<ul>\r\n        {data.info}\r\n    </ul>);\r\n};"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records UI React 1-.md",
+    "lang": "ts",
+    "code": "const [count, setCount] = useState(0);"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records UI React 1-.md",
+    "lang": "ts",
+    "code": "setCount((count) => {return count + 1});"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records UI React 1-.md",
+    "lang": "ts",
+    "code": "const App: React.FC<Props> = ({ element1 = \"Hello\", element2 = \"World\" }) => {}"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records UI React 1-.md",
+    "lang": "ts",
+    "code": "useEffect(()=>{\r\n    //implementation\r\n})"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records UI React 1-.md",
+    "lang": "ts",
+    "code": "useEffect(()=>{\r\n   //implementation\r\n},[])"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records UI React 1-.md",
+    "lang": "ts",
+    "code": "useEffect(()=>{\r\n   //implementation\r\n},[props,state])"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records UI React 1-.md",
+    "lang": "ts",
+    "code": "import React from 'react';\r\ntype Props = {\r\n  children: React.ReactNode;\r\n};\r\nconst App: React.FC<Props> = ({ children }) => {\r\n  let count = 1;\r\n  React.Children.map(children, () => {\r\n    console.log('child', count++);\r\n  });\r\n  return <ul>{children}</ul>;\r\n};\r\nexport default App;"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records UI React 1-.md",
+    "lang": "ts",
+    "code": "import React from 'react';\r\n...\r\nrootEle.render(\r\n  <React.StrictMode>\r\n    <App>\r\n      <li>List element</li>\r\n      <h3>Heading element</h3>\r\n      <p>Paragraph element</p>\r\n      <span>Span element</span>\r\n    </App>\r\n  </React.StrictMode>\r\n);"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records UI React 1-.md",
+    "lang": "",
+    "code": "npm install react-router-dom"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records UI React 1-.md",
+    "lang": "ts",
+    "code": "import { BrowserRouter, Routes, Route, Link} from 'react-router-dom';"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records UI React 1-.md",
+    "lang": "tsx",
+    "code": "<BrowserRouter>\r\n        <Routes>\r\n                <Route path = \"/\" element = {<Home/>} />\r\n                <Route path = \"/home\" element = {<Home/>} />\r\n                <Route path = \"/about\" element = {<About/>} />\r\n                <Route path = \"/contact\" element = {<ContactUs/>} />\r\n        </Routes>\r\n</BrowserRouter>"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records UI React 1-.md",
+    "lang": "tsx",
+    "code": "<nav className=\"navbar navbar-expand-lg navbar-dark bg-light\">\r\n  <Link to=\"/\"><p className=\"nav-item nav-link\">Home</p></Link> |\r\n  <Link to=\"/login\"><p className=\"nav-item nam-link\">Login</p></Link> |\r\n  <Link to=\"/search\"><p className=\"nav-item nam-link\">Search</p></Link> |\r\n</nav>"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records UI React 1-.md",
+    "lang": "tsx",
+    "code": "<Route path=\"/\" element={<Header />}>\r\n  <Route index element={<Home />} />\r\n  <Route path=\"/home\" element={<Home />} />\r\n  <Route path=\"/about\" element={<About />} />\r\n  <Route path=\"/contact\" element={<ContactUs />} />\r\n</Route>"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records UI React 1-.md",
+    "lang": "tsx",
+    "code": "<BrowserRouter>\r\n    <Routes>\r\n      <Route path=\"/\" element={<Login/>} />\r\n      <Route path=\"/landing/:name/*\" element={<Landing/>}/>\r\n    </Routes>\r\n  </BrowserRouter>"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records UI React 1-.md",
+    "lang": "tsx",
+    "code": "let params = useParams<interfacename>(); // Create a new type/interface to recive the path variables\r\nparams.name;"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records UI React 1-.md",
+    "lang": "tsx",
+    "code": "<Route path=\"*\" element={<NotFound/>} />"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records UI React 1-.md",
+    "lang": "ts",
+    "code": "let navigate = useNavigate();\r\n...\r\nnavigate(`/landing/${name}`);"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records UI React 2.md",
+    "lang": "ts",
+    "code": "npm install axios"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records UI React 2.md",
+    "lang": "ts",
+    "code": "axios.get<YourDataType>('url')\r\n    .then((result: AxiosResponse<YourDataType>) => {\r\n    console.log(result.data);\r\n    // Handle the data here\r\n    })\r\n    .catch((error) => {\r\n    console.error(error);\r\n    // Handle errors here\r\n    });"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records UI React 2.md",
+    "lang": "ts",
+    "code": "axios.post<ResponseData>('url', requestData)\r\n    .then((result: AxiosResponse<ResponseData>) => {\r\n    console.log(result.data);\r\n    // Handle the data here\r\n    })\r\n    .catch((error) => {\r\n    console.error(error);\r\n    // Handle errors here\r\n    });"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records UI React 2.md",
+    "lang": "ts",
+    "code": "const [state, setState] = useState({ username: \"\", password: \"\" });"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records UI React 2.md",
+    "lang": "ts",
+    "code": "const setFormState = (event: React.ChangeEvent<HTMLInputElement>) => {\r\n    const {name, value} = event.target;\r\n\r\n    setFormData((prev) =>  ({...prev, [name]: value}));\r\n}"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records UI React 2.md",
+    "lang": "tsx",
+    "code": "<div className=\"form-group\">\r\n    <label>Username:</label>\r\n    <input\r\n        style={{ width: \"40%\" }}\r\n        type=\"text\"\r\n        className=\"form-control\"\r\n        placeholder=\"Enter Name\"\r\n        name=\"username\"\r\n        autoComplete=\"off\"\r\n        onChange={setFormState}\r\n    />\r\n</div>"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records UI React 2.md",
+    "lang": "ts",
+    "code": "const [username, setUsername] = useState<string>('');\r\n  const [password, setPassword] = useState<string>('');"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records UI React 2.md",
+    "lang": "tsx",
+    "code": "<div className=\"form-group\">\r\n    <label>Username:</label>\r\n    <input\r\n      style={{ width: '40%' }}\r\n      type=\"text\"\r\n      value={username}\r\n      onChange={(event) => setUsername(event.target.value)}\r\n      className=\"form-control\"\r\n      placeholder=\"Enter Name\"\r\n    />\r\n</div>"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records UI React 2.md",
+    "lang": "ts",
+    "code": "const [formState, setFormState] = useState<State>({\r\n    email: \"\",\r\n    password: \"\",\r\n    message: \"\",\r\n    textStyle: \"\"\r\n});\r\n\r\nconst handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {\r\n    event.preventDefault();\r\n\r\n    if(formState.email == \"\" || formState.password == \"\") {\r\n        setFormState((prev) => ({...prev, message: \"All fields are mandatory\", textStyle: \"danger\"}));\r\n        return;\r\n    }\r\n\r\n    if(!validateEmail(formState.email)) {\r\n        setFormState((prev) => ({...prev, message: \"Invalid email\", textStyle: \"danger\"}));\r\n        return;\r\n    }\r\n\r\n    setFormState((prev) => ({...prev, message: \"Login success\", textStyle: \"success\"}));\r\n}\r\n\r\nconst handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {\r\n    const {name, value} = event.target;\r\n\r\n    setFormState((prev) => ({...prev, [name]: value, message: \"\"}));\r\n}"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records UI React 2.md",
+    "lang": "tsx",
+    "code": "<form\r\n    style={{\r\n        position: \"relative\",\r\n        left: \"50px\",\r\n        width: \"40%\",\r\n        margin: \"auto\",\r\n        border: \"1px solid #ccc\",\r\n        padding: \"20px\",\r\n        borderRadius: \"5px\",\r\n        boxShadow: \"0 2px 4px rgba(0, 0, 0, 0.1)\",\r\n    }}\r\n    onSubmit={handleSubmit}\r\n>\r\n    <h3 style={{ textAlign: \"center\" }}>Login</h3>\r\n    <div style={{ marginBottom: \"15px\" }} className=\"form-group\">\r\n        <label>Email:</label>\r\n        <input\r\n            style={{ width: \"100%\", padding: \"10px\", boxSizing: \"border-box\" }}\r\n            className=\"form-control\"\r\n            name=\"email\"\r\n            type=\"text\"\r\n            onChange={handleChange}\r\n        />\r\n    </div>\r\n    <div style={{ marginBottom: \"15px\" }} className=\"form-group\">\r\n        <label>Password:</label>\r\n        <input\r\n            style={{ width: \"100%\", padding: \"10px\", boxSizing: \"border-box\" }}\r\n            className=\"form-control\"\r\n            name=\"password\"\r\n            type=\"password\"\r\n            onChange={handleChange}\r\n        />\r\n    </div>\r\n    {formState.message !== \"\" && (\r\n        <div\r\n            style={{ marginBottom: \"15px\" }}\r\n            className={`text text-${formState.textStyle}`}\r\n        >\r\n            {formState.message}\r\n        </div>\r\n    )}\r\n    <button\r\n        style={{\r\n            backgroundColor: \"#28a745\",\r\n            color: \"#fff\",\r\n            padding: \"10px 15px\",\r\n            border: \"none\",\r\n            borderRadius: \"3px\",\r\n            cursor: \"pointer\",\r\n        }}\r\n        className=\"btn btn-success\"\r\n    >\r\n        Login\r\n    </button>\r\n</form>"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records UI React 2.md",
+    "lang": "ts",
+    "code": "const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {\r\n    if(event.key == \"Enter\"){\r\n        handleSubmit();\r\n    }\r\n    else{\r\n        console.log(\"Key pressed: \" + event.key);\r\n    }\r\n}"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records UI React 2.md",
+    "lang": "tsx",
+    "code": "<div>\r\n    <h2>Search Form (Key-Events Demo)</h2>\r\n    <input\r\n        type=\"text\"\r\n        value={searchText}\r\n        onChange={(event) => setSearchText(event.target.value)}\r\n        onKeyPress={handleKeyPress} // <--\r\n        placeholder=\"Search...\"\r\n    />\r\n    <button onClick={handleSubmit}>Search</button>\r\n    <p>Search request sent for: {searchRequest}</p>\r\n</div>"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records UI React 2.md",
+    "lang": "ts",
+    "code": "const usernameRef = useRef<HTMLInputElement>(null);"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records UI React 2.md",
+    "lang": "tsx",
+    "code": "<input\r\n    type=\"text\"\r\n    ref={usernameRef} // <--\r\n    className=\"form-control\"\r\n    placeholder=\"Enter Name\"\r\n/>"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records UI React 2.md",
+    "lang": "ts",
+    "code": "usernameRef.current?.value\r\n``\r\n\r\nCreate a `useRef` for a form to clear all the input fields in the form"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records UI React 2.md",
+    "lang": "",
+    "code": "Use `clear()` to clear all the refs the form uses"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records UI React 2.md",
+    "lang": "",
+    "code": ""
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records UI React 3.md",
+    "lang": "json",
+    "code": "{ \r\n    type: \"ADD_TODO\",   \r\n    todo: \"Shopping\"\r\n}"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records UI TS 1-Type-var-enum-array.md",
+    "lang": "ts",
+    "code": "let productId:number=1045;"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records UI TS 1-Type-var-enum-array.md",
+    "lang": "ts",
+    "code": "function getProductDetails(productId: number): string{\r\n    return \"Product ID\"+productId;\r\n}"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records UI TS 1-Type-var-enum-array.md",
+    "lang": "ts",
+    "code": "let uName = \"Steve\"; // Even though the datatype of the variable uName is not specified here, but as\r\n// we have first assigned a string type value \"Steve\", so the Datatype of the variable uName is set to \"String\"\r\nuName =  87456 // throws an error \"Type '87451' is not assignable to type 'string'\"\r\nuName = \"John\" // the value of variable uName is assigned to \"John\""
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records UI TS 1-Type-var-enum-array.md",
+    "lang": "ts",
+    "code": "if (true) {\r\n    console.log(var1); // undefined\r\n    var var1: number | undefined = 100;\r\n    console.log(var1); // 100\r\n}\r\n\r\nconsole.log(var1); //100"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records UI TS 1-Type-var-enum-array.md",
+    "lang": "ts",
+    "code": "console.log(num);\r\nvar num: number|undefined = 20;\r\nconsole.log(num)"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records UI TS 1-Type-var-enum-array.md",
+    "lang": "ts",
+    "code": "enum EnumName{property1,property2,property3};"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records UI TS 1-Type-var-enum-array.md",
+    "lang": "ts",
+    "code": "enum MobilePrice{Black,Gold,White} ;"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records UI TS 1-Type-var-enum-array.md",
+    "lang": "ts",
+    "code": "for (let i of nums) {\r\n    console.log(i);\r\n}"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records UI TS 1-Type-var-enum-array.md",
+    "lang": "ts",
+    "code": "let products:string[]=[\"Mobiles\",\"Tablets\"];\r\nproducts.push(\"Television\");\r\nproducts.push(\"Air Conditioners\");\r\n\r\n\r\nconsole.log(products) //[\"Mobiles\",\"Tablets\", \"Television\", \"Air conditioners\"]"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records UI TS 1-Type-var-enum-array.md",
+    "lang": "ts",
+    "code": "let products:string[]=[\"Mobiles\",\"Tablets\"];\r\nproducts[2]=\"Television\";\r\nproducts[3]=\"Air Conditioners\";\r\n\r\nconsole.log(products) //[\"Mobiles\",\"Tablets\", \"Television\", \"Air conditioners\"]"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records UI TS 1-Type-var-enum-array.md",
+    "lang": "ts",
+    "code": "let cssLib: string[] = [\"BS\", \"TCSS\", \"PR\"]\r\n\r\ncssLib[4] = \"vinayak\"\r\nconsole.log(cssLib) //[ 'BS', 'TCSS', 'PR', <2 empty items>, 'vinayak' ]"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records UI TS 1-Type-var-enum-array.md",
+    "lang": "ts",
+    "code": "let nums = [0, 1, 2, 3, 4, 5, 6];\r\n\r\nconsole.log(nums.splice(2, 4)); //[ 2, 3, 4, 5 ]\r\nconsole.log(nums); //[ 0, 1, 6 ]"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records UI TS 1-Type-var-enum-array.md",
+    "lang": "ts",
+    "code": "let nums: number[] = [0, 1, 2, 3, 4, 5, 6];\r\n\r\nnums.splice(2, 4, ...[5, 0, 0, 2]);\r\nconsole.log(nums); //  [0, 1, 5, 0, 0, 2, 6]"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records UI TS 1-Type-var-enum-array.md",
+    "lang": "ts",
+    "code": "let  manufacturers:any[] = [\r\n    { \"id\": \"Samsung\", \"checked\": false },\r\n    { \"id\": \"Motorola\", \"checked\": false },\r\n    { \"id\": \"Apple\", \"checked\": false },\r\n    { \"id\": \"Sony\", \"checked\": false }\r\n];\r\n\r\nmanufacturers.forEach( function(manufacturer) {\r\n    console.log(manufacturer); // Prints all the elements\r\n});"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records UI TS 1-Type-var-enum-array.md",
+    "lang": "ts",
+    "code": "manufacturers.map((e: string) => e.toUpperCase()); // returns a new [] with all caps manufacturers"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records UI TS 1-Type-var-enum-array.md",
+    "lang": "ts",
+    "code": "console.log(manufacturers.filter(e => e.id.length > 5));"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records UI TS 1-Type-var-enum-array.md",
+    "lang": "ts",
+    "code": "console.log(manufacturers.find(e => e.id.length > 5)); // returns   { id: 'Samsung', checked: false }"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records UI TS 1-Type-var-enum-array.md",
+    "lang": "ts",
+    "code": "const allPositive = numbers.every((num) => num > 0);"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records UI TS 1-Type-var-enum-array.md",
+    "lang": "ts",
+    "code": "const anyPostive = numbers.some((num) => num > 0);"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records UI TS 2-params-class-static-abstract-interface-inheritance-modules.md",
+    "lang": "ts",
+    "code": "function getDetails(productName: string, productDescription?: number){\r\n    return\r\n}"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records UI TS 2-params-class-static-abstract-interface-inheritance-modules.md",
+    "lang": "ts",
+    "code": "function getDetails(productName: string=\"clothing\", productDescription?: number){\r\n    return\r\n}"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records UI TS 2-params-class-static-abstract-interface-inheritance-modules.md",
+    "lang": "ts",
+    "code": "function getDetails(...params: string[]){\r\n    return\r\n}"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records UI TS 2-params-class-static-abstract-interface-inheritance-modules.md",
+    "lang": "ts",
+    "code": "getDetails(...[\"clothing\", \"footware\", \"garments\"]);"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records UI TS 2-params-class-static-abstract-interface-inheritance-modules.md",
+    "lang": "ts",
+    "code": "class Product {\r\n    productId: number | undefined;\r\n\r\n    getProductDetails(productId: number): string{\r\n        return \"Product id is: \" + productId.toString();\r\n    }\r\n}"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records UI TS 2-params-class-static-abstract-interface-inheritance-modules.md",
+    "lang": "ts",
+    "code": "class Product {\r\n    productId: number | undefined;\r\n\r\n    constructor (productId: number) {\r\n        this.productId = productId;\r\n    }\r\n}"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records UI TS 2-params-class-static-abstract-interface-inheritance-modules.md",
+    "lang": "ts",
+    "code": "class SpecialProduct {\r\n    constructor (private productId: string){}\r\n}"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records UI TS 2-params-class-static-abstract-interface-inheritance-modules.md",
+    "lang": "ts",
+    "code": "interface InterfaceName {\r\n    properties;\r\n    method declarations;\r\n}"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records UI TS 2-params-class-static-abstract-interface-inheritance-modules.md",
+    "lang": "ts",
+    "code": "interface Product {\r\n    productId: number;\r\n    productName: string;\r\n    getProductDetails(productId: number): string;\r\n    displayproductName: (productId: number)=>string;\r\n}"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records UI TS 2-params-class-static-abstract-interface-inheritance-modules.md",
+    "lang": "ts",
+    "code": "interface Electronics {\r\n    name: string;\r\n}\r\n\r\nclass Laptop implements Electronics {\r\n    name: string;\r\n\r\n    constructor(name: string) {\r\n        this.name = name;\r\n    }\r\n    amount() {\r\n        console.log(\"48000\");\r\n    }\r\n}\r\n\r\nlet dell: Electronics = new Laptop(\"Laptop\");\r\ndell.amount(); // error"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Unix 0. Some.md",
+    "lang": "bash",
+    "code": "if [[ -e $1 && -n $(cat $1) ]]; then\r\n  echo \"File exists and Not empty\"\r\nfi"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Unix 0. Some.md",
+    "lang": "bash",
+    "code": "# Define regex patterns\r\nemail_regex=\"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$\"\r\nphone_regex=\"^[0-9]{10}$\"\r\nacc_regex=\"^[0-9]+$\"\r\n\r\n# Validate email ID\r\nif [[ ! $email_id =~ $email_regex ]]; then\r\n  echo \"The email ID you entered is wrong\"\r\nfi\r\n\r\n# Validate phone number\r\nif [[ ! $phone_number =~ $phone_regex ]]; then\r\n  echo \"The phone number you entered is wrong\"\r\nfi\r\n\r\n# Validate account number\r\nif [[ ! $acc_number =~ $acc_regex ]]; then\r\n  echo \"The account number you entered is wrong\"\r\nfi\r\n\r\n# Final message if all inputs are valid\r\nif [[ $email_id =~ $email_regex && $phone_number =~ $phone_regex && $acc_number =~ $acc_regex ]]; then\r\n  echo \"All inputs are valid.\"\r\nfi"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Unix Scripting.md",
+    "lang": "bash",
+    "code": "mix_array=(10 20 30 40 50 60 70 \"Infosys\" \"Limited\")"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Unix Scripting.md",
+    "lang": "bash",
+    "code": "echo ${mix_array[*]}\r\n#OR\r\necho ${mix_array[@]}"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Unix Scripting.md",
+    "lang": "bash",
+    "code": "echo \"Length of the array is \"${#mix_array[*]}"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Unix Scripting.md",
+    "lang": "bash",
+    "code": "echo \"Second Element is ${mix_array[1]}\""
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Unix Scripting.md",
+    "lang": "bash",
+    "code": "echo \"Length of Second Element is: \"${#mix_array[1]}"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Unix Scripting.md",
+    "lang": "bash",
+    "code": "sub_var=`ls -l`\r\n\r\n# Prints with space speration\r\necho $sub_var\r\n\r\n# Prints with new line speration\r\necho \"$sub_var\""
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Unix Scripting.md",
+    "lang": "bash",
+    "code": "if [ condition ];\r\nthen\r\n<statements>\r\nelif [ condition ];\r\nthen\r\n<statements>\r\nelse\r\n<statements>\r\nfi"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Unix Scripting.md",
+    "lang": "bash",
+    "code": "case variable in \r\noption 1) \r\n      statements to be executed if option 1 matches\r\n      ;;\r\nOption 2) \r\n      statements to be executed if option 2 matches\r\n      ;;\r\n*) \r\n      default statement\r\nesac"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Unix Scripting.md",
+    "lang": "bash",
+    "code": "for variable in <list>; do\r\n<statements>\r\ndone"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Unix Scripting.md",
+    "lang": "bash",
+    "code": "while [ condition ] ; do\r\n<statements>\r\ndone"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Unix Scripting.md",
+    "lang": "bash",
+    "code": "until [ condition ] ; do\r\n<statements>\r\ndone"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Unix Scripting.md",
+    "lang": "bash",
+    "code": "break [n]"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Unix Scripting.md",
+    "lang": "bash",
+    "code": "num2=`expr $num1 - 1`"
+  },
+  {
+    "filePath": "C: Users 91988 OneDrive Documents Obsidian punk_records Unix Scripting.md",
+    "lang": "bash",
+    "code": "num1=3\r\nwhile [ $num1 -gt 0 ]\r\ndo\r\n        num2=`expr $num1 - 1`\t# This is how calculations are done in Shell, using expr command #\r\n        while [ $num2 -gt 0 ]\r\n        do\r\n                echo \"Value of num1: $num1\"\r\n                echo \"Value of num2: $num2\"\r\n                num2=`expr $num2 - 1`\r\n        done\r\n        num1=`expr $num1 - 1`\r\ndone"
+  }
+]
