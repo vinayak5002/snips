@@ -1,26 +1,32 @@
-function preprocess(text) {
-  if (text !== undefined)
-    return text
-      .toLowerCase()
-      .replace(/[^a-z\s]/g, "") // Remove non-alphabetic characters
-      .split(/\s+/); // Split by spaces into tokens
+function preprocess(text, n = 3) {
+  if (text !== undefined) {
+    text = text.toLowerCase().replace(/[^a-z\s]/g, ""); // Remove non-alphabetic characters
+    const ngrams = [];
+
+    for (let i = 0; i <= text.length - n; i++) {
+      ngrams.push(text.substring(i, i + n)); // Generate n-grams of length n
+    }
+
+    return ngrams.length ? ngrams : [text]; // If ngrams is empty, return the cleaned text
+  }
+  return [];
 }
 
-function calculateTF(document) {
-  const words = preprocess(document);
+function calculateTF(document, n = 3) {
+  const ngrams = preprocess(document, n);
   const termFrequency = {};
-  const totalWords = words.length;
+  const totalNgrams = ngrams.length;
 
-  words.forEach((word, index) => {
-    if (word) {
-      // Calculate position score (1 for the first word, 0 for the last word)
-      const positionScore = (totalWords - index) / totalWords;
+  ngrams.forEach((ngram, index) => {
+    if (ngram) {
+      // Calculate position score (1 for the first ngram, 0 for the last ngram)
+      const positionScore = (totalNgrams - index) / totalNgrams;
 
       // Calculate weighted frequency based on position
-      if (termFrequency[word]) {
-        termFrequency[word] += positionScore;
+      if (termFrequency[ngram]) {
+        termFrequency[ngram] += positionScore;
       } else {
-        termFrequency[word] = positionScore;
+        termFrequency[ngram] = positionScore;
       }
     }
   });
@@ -30,45 +36,45 @@ function calculateTF(document) {
     (sum, val) => sum + val,
     0
   );
-  for (let word in termFrequency) {
-    termFrequency[word] /= totalPositionScores;
+  for (let ngram in termFrequency) {
+    termFrequency[ngram] /= totalPositionScores;
   }
 
   return termFrequency;
 }
 
-function calculateIDF(documents) {
+function calculateIDF(documents, n = 3) {
   const idf = {};
   const totalDocs = documents.length;
 
   documents.forEach((document) => {
-    const words = new Set(preprocess(document));
-    words.forEach((word) => {
-      if (idf[word]) {
-        idf[word] += 1;
+    const ngrams = new Set(preprocess(document, n));
+    ngrams.forEach((ngram) => {
+      if (idf[ngram]) {
+        idf[ngram] += 1;
       } else {
-        idf[word] = 1;
+        idf[ngram] = 1;
       }
     });
   });
 
   // Convert counts to IDF scores
-  for (let word in idf) {
-    idf[word] = Math.log(totalDocs / idf[word]);
+  for (let ngram in idf) {
+    idf[ngram] = Math.log(totalDocs / idf[ngram]);
   }
 
   return idf;
 }
 
-function calculateTFIDF(document, idf) {
-  const tf = calculateTF(document);
+function calculateTFIDF(document, idf, n = 3) {
+  const tf = calculateTF(document, n);
   const tfidf = {};
 
-  for (let word in tf) {
-    if (idf[word]) {
-      tfidf[word] = tf[word] * idf[word];
+  for (let ngram in tf) {
+    if (idf[ngram]) {
+      tfidf[ngram] = tf[ngram] * idf[ngram];
     } else {
-      tfidf[word] = 0;
+      tfidf[ngram] = 0;
     }
   }
 
@@ -80,13 +86,13 @@ function cosineSimilarity(tfidf1, tfidf2) {
   let magnitude1 = 0;
   let magnitude2 = 0;
 
-  for (let word in tfidf1) {
-    dotProduct += (tfidf1[word] || 0) * (tfidf2[word] || 0);
-    magnitude1 += (tfidf1[word] || 0) ** 2;
+  for (let ngram in tfidf1) {
+    dotProduct += (tfidf1[ngram] || 0) * (tfidf2[ngram] || 0);
+    magnitude1 += (tfidf1[ngram] || 0) ** 2;
   }
 
-  for (let word in tfidf2) {
-    magnitude2 += (tfidf2[word] || 0) ** 2;
+  for (let ngram in tfidf2) {
+    magnitude2 += (tfidf2[ngram] || 0) ** 2;
   }
 
   magnitude1 = Math.sqrt(magnitude1);
@@ -99,18 +105,18 @@ function cosineSimilarity(tfidf1, tfidf2) {
   }
 }
 
-function searchDocuments(documents, query) {
+function searchDocuments(documents, query, n = 3) {
   // Preprocess the documents and query
   const documentContents = documents.map(
     (doc) => doc.filePath + " " + doc.lang + " " + doc.code
   );
 
-  const idf = calculateIDF(documentContents);
-  const queryTFIDF = calculateTFIDF(query, idf);
+  const idf = calculateIDF(documentContents, n);
+  const queryTFIDF = calculateTFIDF(query, idf, n);
 
   // Calculate TF-IDF for each document
   const scores = documents.map((doc, index) => {
-    const docTFIDF = calculateTFIDF(documentContents[index], idf);
+    const docTFIDF = calculateTFIDF(documentContents[index], idf, n);
     return {
       document: doc,
       score: cosineSimilarity(queryTFIDF, docTFIDF),
