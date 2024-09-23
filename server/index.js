@@ -3,71 +3,76 @@ const cors = require("cors");
 const fs = require("fs");
 const path = require("path");
 const { readDirectoryRecursive } = require("./utils/fileUtils.js");
-const { searchDocuments } = require("./utils/tf-idf.js");
+const { searchDocuments, calculateIDF } = require("./utils/tf-idf.js");
 const app = express();
 const port = 5000;
 
 // Basic CORS configuration
 app.use(cors());
-// Express route to handle the repository request
-app.get("/repos/:id", (req, res) => {
-  // Start timing
-  console.time("repoFetchTime");
 
-  const index = req.params.id;
+app.get("/current-repo", (req, res) => {
+  const data = fs.readFileSync(path.join(__dirname, "user.json"), "utf8");
+  const user = JSON.parse(data);
 
-  try {
-    const data = fs.readFileSync(path.join(__dirname, "repos.json"), "utf8");
-    const repos = JSON.parse(data);
+  return user.repoPath;
+});
 
-    if (!repos || !repos[index]) {
-      res.status(404).send("Repo not found");
-      // End timing and log duration
-      console.timeEnd("repoFetchTime");
-      return;
-    }
+app.post("/current-repo", (req, res) => {
+  const { repoPath } = req.repoPath;
 
-    const repoPath = repos[index].path;
+  // read the file user.json
+  const data = fs.readFileSync(path.join(__dirname, "user.json"), "utf8");
+  const user = JSON.parse(data);
 
-    if (!fs.existsSync(repoPath)) {
-      res.status(404).send("Directory not found");
-      // End timing and log duration
-      console.timeEnd("repoFetchTime");
-      return;
-    }
+  // update the repoPath
+  user.repoPath = repoPath;
 
-    const directoryList = readDirectoryRecursive(repoPath);
-
-    //save the response to a file
-    fs.writeFileSync(
-      path.join(__dirname, "documents.json"),
-      JSON.stringify(directoryList, null, 2)
-    );
-
-    res.json(directoryList);
-
-    // End timing and log duration
-    console.timeEnd("repoFetchTime");
-  } catch (error) {
-    console.error(error);
-    res.status(500).send("Internal Server Error");
-
-    // End timing and log duration
-    console.timeEnd("repoFetchTime");
-  }
+  // save the file
+  fs.writeFileSync(path.join(__dirname, "user.json"), JSON.stringify(user, null, 2));
+  
+  res.send("Repo path updated");
 });
 
 app.get("/search", (req, res) => {
   const {query} = req.query;
   console.log(query);
 
-  // read documents form the file
-  const documents = JSON.parse(
-    fs.readFileSync(path.join(__dirname, "documents.json"), "utf8")
-  );
+  // read the file user.json
+  const data = fs.readFileSync(path.join(__dirname, "user.json"), "utf8");
+  const user = JSON.parse(data);
+
+  const currentRepo = user.currentRepoPath;
+  const repoId = user.repos.findIndex((repo) => repo.path === currentRepo);
+
+  const idfFileName = path.join(__dirname, "idfs", `idf-${repoId}.json`);
+  const documentFileName = path.join(__dirname, "documents", `documents-${repoId}.json`);
+
+  var idf;
+  var documentList;
+
+  // check if the repo is already indexed
+  if (!fs.existsSync(idfFileName)) {
+    // get the documents in the repo
+    documentList = readDirectoryRecursive(currentRepo);
+    
+    // calculate the idf
+    const documentContents = documentList.map(
+      (doc) => doc.filePath + " " + doc.lang + " " + doc.code
+    );
+    idf = calculateIDF(documentContents);
+
+    // save the idf and document list 
+    fs.writeFileSync(idfFileName, JSON.stringify(idf, null, 2));
+    fs.writeFileSync(documentFileName, JSON.stringify(documentList, null, 2));
+  }
+  else {
+    // read the idf and document list if its already saved 
+    idf = JSON.parse(fs.readFileSync(idfFileName, "utf8"));
+    documentList = JSON.parse(fs.readFileSync(documentFileName, "utf8"));
+  }
 
   // search the documents
-  const results = searchDocuments(documents, query);
+  const results = searchDocuments(documentList, idf, query);
 
   res.send(results);
 })

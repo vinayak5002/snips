@@ -48,6 +48,7 @@ function calculateIDF(documents, n = 3) {
   const totalDocs = documents.length;
 
   documents.forEach((document) => {
+    console.log(document)
     const ngrams = new Set(preprocess(document, n));
     ngrams.forEach((ngram) => {
       if (idf[ngram]) {
@@ -62,7 +63,7 @@ function calculateIDF(documents, n = 3) {
   for (let ngram in idf) {
     idf[ngram] = Math.log(totalDocs / idf[ngram]);
   }
-
+  console.log(idf)
   return idf;
 }
 
@@ -105,13 +106,11 @@ function cosineSimilarity(tfidf1, tfidf2) {
   }
 }
 
-function searchDocuments(documents, query, n = 3) {
-  // Preprocess the documents and query
+function searchDocuments(documents, idf, query, n = 3) {
   const documentContents = documents.map(
     (doc) => doc.filePath + " " + doc.lang + " " + doc.code
   );
 
-  const idf = calculateIDF(documentContents, n);
   const queryTFIDF = calculateTFIDF(query, idf, n);
 
   // Calculate TF-IDF for each document
