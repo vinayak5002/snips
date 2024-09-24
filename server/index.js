@@ -14,7 +14,8 @@ app.get("/current-repo", (req, res) => {
   const data = fs.readFileSync(path.join(__dirname, "user.json"), "utf8");
   const user = JSON.parse(data);
 
-  return user.repoPath;
+  console.log(user)
+  res.send(user.currentRepoPath);
 });
 
 app.post("/current-repo", (req, res) => {
@@ -31,6 +32,16 @@ app.post("/current-repo", (req, res) => {
   fs.writeFileSync(path.join(__dirname, "user.json"), JSON.stringify(user, null, 2));
   
   res.send("Repo path updated");
+});
+
+app.get("/saved-repos", (req, res) => {
+
+  const data = fs.readFileSync(path.join(__dirname, "user.json"), "utf-8");
+  const user = JSON.parse(data);
+
+  console.log("Sending: ", user.repos);
+
+  res.send(user.repos);
 });
 
 app.get("/search", (req, res) => {

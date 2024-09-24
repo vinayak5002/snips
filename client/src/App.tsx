@@ -1,48 +1,61 @@
-import { useEffect, useState } from "react";
+import { StrictMode, useEffect } from "react";
 import "./App.css";
-import ReactMarkdown from "react-markdown";
 import axios from "axios";
+import { Provider } from "react-redux";
+import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
+import SearchPage from "./pages/SearchPage";
+import { store } from "./store/store";
+import { useDispatch } from "react-redux";
+import { set } from "./store/path/pathSlice";
+import SelectRepoPage from "./pages/SelectRepoPage";
 
-type Snippet = {
-  lang: string;
-  code: string;
-};
+// Create a new component for handling the repo fetching and navigation logic
+function RepoHandler() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-function App() {
-  const [snippetList, setSnippetList] = useState<Snippet[]>([]);
-
-  const fetchData = async () => {
+  const fetchCurrentRepo = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/repos/0");
-      // Assuming response.data[0].snippets is the correct path
+      const response = await axios.get("http://localhost:5000/current-repo");
       console.log(response);
 
-      const snippets: Snippet[] = response.data;
-      
-      setSnippetList(snippets);
-    } catch (err) {
-      console.log(err);
+      const currentRepoPath = response.data;
+
+      dispatch(set(currentRepoPath));
+
+      console.log("Current repo path: ", currentRepoPath);
+
+      if (currentRepoPath === "") {
+        console.log("Current repo path not set");
+        navigate("/select-repo");
+      } else {
+        navigate("/search");
+      }
+    } catch (error) {
+      console.error(error);
     }
   };
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    fetchCurrentRepo();
+  }, [dispatch]);
 
+  return null; 
+}
+
+function App() {
   return (
-    <>
-      <div className="card">
-        {snippetList.map((snip, index) => (
-          <div key={index}>
-            <h3>Language: {snip.lang}</h3>
-            {/* Render code snippet with proper Markdown formatting */}
-            <ReactMarkdown>
-              {`~~~${snip.lang}\n${snip.code}\n~~~`}
-            </ReactMarkdown>
-          </div>
-        ))}
-      </div>
-    </>
+    <Provider store={store}>
+      <StrictMode>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<RepoHandler />} />
+            <Route path="/search" element={<SearchPage />} />
+            <Route path="/select-repo" element={<SelectRepoPage />} />
+          </Routes>
+        </BrowserRouter>
+      </StrictMode>
+    </Provider>
   );
 }
 
