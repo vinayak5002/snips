@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import { Snippet } from "../types/types";
 import axios from "axios";
+import CodeSnippet from "../components/CodeSnippet";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const SearchPage = () => {
   const [snips, setSnips] = useState<Snippet[]>([]);
@@ -24,7 +27,7 @@ const SearchPage = () => {
 
       const snippets: Snippet[] = response.data;
 
-      setSnips(snippets);
+      setSnips(snippets.slice(0, 15));
     } catch (err) {
       console.log(err);
     }
@@ -41,6 +44,17 @@ const SearchPage = () => {
 
   return (
     <div>
+      <ToastContainer
+        position="top-right" // Position of the toast
+        autoClose={1000} // Auto-close after 3 seconds
+        hideProgressBar={true} // Show progress bar
+        newestOnTop={true} // New toasts on top
+        closeOnClick // Close on click
+        draggable // Enable drag and drop
+        draggablePercent={60} // Percentage of the toast width the user needs to drag to dismiss
+        rtl={false} // Set to true for right-to-left layout
+        theme="dark" // Can be "light" or "dark"
+      />
       <form
         onSubmit={(e) => {
           e.preventDefault();
@@ -62,7 +76,8 @@ const SearchPage = () => {
           <div key={index}>
             <h3>Language: {snip.lang}</h3>
             <pre>
-              <code>{snip.code}</code>
+              {/* <code>{snip.code}</> */}
+              <CodeSnippet snip={snip} />
             </pre>
           </div>
         ))}

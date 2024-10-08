@@ -3,11 +3,11 @@ import "./App.css";
 import axios from "axios";
 import { Provider } from "react-redux";
 import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
-import SearchPage from "./Pages/SearchPage";
+import SearchPage from "./pages/SearchPage";
 import { store, AppDispatch } from "./store/store";
 import { useDispatch } from "react-redux";
 import { updateCurrentRepoPath } from "./store/path/pathSlice";
-import SelectRepoPage from "./Pages/SelectRepoPage";
+import SelectRepoPage from "./pages/SelectRepoPage";
 
 
 function RepoHandler() {
@@ -44,7 +44,7 @@ function RepoHandler() {
 function App() {
   return (
     <Provider store={store}>
-      <StrictMode>
+       <StrictMode>
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<RepoHandler />} />
