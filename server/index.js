@@ -74,7 +74,7 @@ app.get("/search", (req, res) => {
   var documentList;
 
   // check if the repo is already indexed
-  if (!fs.existsSync(idfFileName)) {
+  if (!fs.existsSync(idfFileName) || !fs.existsSync(documentFileName)) {
     // get the documents in the repo
     documentList = readDirectoryRecursive(currentRepo);
     
