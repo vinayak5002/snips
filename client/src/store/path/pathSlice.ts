@@ -38,7 +38,7 @@ const PathSlice = createSlice({
             console.log("POST: Updating user current repo path succeeded");
         });
         builder.addCase(updateCurrentRepoPath.rejected, (state, action) => {
-            console.error("Failed to update path", action.error);
+            console.error("Failed to update path", state.path, action.error);
         });
     }
 });

@@ -13,6 +13,8 @@ app.use(cors());
 // Parse JSON bodies (as sent by API clients)
 app.use(express.json());
 
+app.use(express.static(path.join(__dirname, '../client/dist')));
+
 app.get("/current-repo", (req, res) => {
   const data = fs.readFileSync(path.join(__dirname, "user.json"), "utf8");
   const user = JSON.parse(data);
