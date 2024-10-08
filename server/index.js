@@ -10,6 +10,9 @@ const port = 5000;
 // Basic CORS configuration
 app.use(cors());
 
+// Parse JSON bodies (as sent by API clients)
+app.use(express.json());
+
 app.get("/current-repo", (req, res) => {
   const data = fs.readFileSync(path.join(__dirname, "user.json"), "utf8");
   const user = JSON.parse(data);
@@ -19,20 +22,28 @@ app.get("/current-repo", (req, res) => {
 });
 
 app.post("/current-repo", (req, res) => {
-  const { repoPath } = req.path;
-  console.log("POST: update user currrent repo path: ", repoPath);
+  console.log("Received post request: ", req.body);
+  const { newRepoPath } = req.body;
 
-  // read the file user.json
+  if (!newRepoPath) {
+      return res.status(400).send('Path is required');
+  }
+
   const data = fs.readFileSync(path.join(__dirname, "user.json"), "utf8");
   const user = JSON.parse(data);
 
-  // update the repoPath
-  user.repoPath = repoPath;
+  console.log("User object before update:", user);
 
-  // save the file
-  fs.writeFileSync(path.join(__dirname, "user.json"), JSON.stringify(user, null, 2));
+  // Update the repoPath
+  user.currentRepoPath = newRepoPath; // Assuming you want to update this field
   
-  res.send("Repo path updated");
+  // Log the modified user object
+  console.log("User object after update:", user);
+
+  // Write the updated user object back to the file
+  fs.writeFileSync(path.join(__dirname, "user.json"), JSON.stringify(user, null, 2));
+
+  res.send(user.currentRepoPath);
 });
 
 app.get("/saved-repos", (req, res) => {
