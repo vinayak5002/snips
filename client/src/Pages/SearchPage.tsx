@@ -8,12 +8,15 @@ import "react-toastify/dist/ReactToastify.css";
 const SearchPage = () => {
   const [snips, setSnips] = useState<Snippet[]>([]);
   const [query, setQuery] = useState<string>("");
+  const [isSearched, setIsSearched] = useState<boolean>(false);
 
   const handleQuery = (e: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(e.target.value);
   };
 
   const fetchData = async () => {
+    if (query === "") return;
+
     console.log("Fetching data...");
     try {
       const response = await axios.get("http://localhost:5000/search", {
@@ -22,18 +25,19 @@ const SearchPage = () => {
         },
       });
 
-      // Assuming response.data[0].snippets is the correct path
       console.log(response);
 
       const snippets: Snippet[] = response.data;
 
       setSnips(snippets.slice(0, 15));
+      setIsSearched(true); // Set search status to true after fetching
     } catch (err) {
       console.log(err);
     }
   };
 
-  const handleSbumit = () => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     console.log("Submitting...");
     fetchData();
   };
@@ -43,45 +47,57 @@ const SearchPage = () => {
   }, []);
 
   return (
-    <div>
+    <div className="h-screen flex flex-col items-center justify-between"> {/* Full height for layout */}
       <ToastContainer
-        position="top-right" // Position of the toast
-        autoClose={1000} // Auto-close after 3 seconds
-        hideProgressBar={true} // Show progress bar
-        newestOnTop={true} // New toasts on top
-        closeOnClick // Close on click
-        draggable // Enable drag and drop
-        draggablePercent={60} // Percentage of the toast width the user needs to drag to dismiss
-        rtl={false} // Set to true for right-to-left layout
-        theme="dark" // Can be "light" or "dark"
+        position="top-right"
+        autoClose={1000}
+        hideProgressBar={true}
+        newestOnTop={true}
+        closeOnClick
+        draggable
+        draggablePercent={60}
+        rtl={false}
+        theme="dark"
       />
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          fetchData();
-        }}
-      >
-        <input
-          type="text"
-          placeholder="Search..."
-          name="query"
-          value={query}
-          onChange={handleQuery}
-        />
-        <button onClick={handleSbumit}>Search</button>
-      </form>
 
-      <div className="card">
-        {snips.map((snip, index) => (
-          <div key={index}>
-            <h3>Language: {snip.lang}</h3>
-            <pre>
-              {/* <code>{snip.code}</> */}
-              <CodeSnippet snip={snip} />
-            </pre>
-          </div>
-        ))}
+      <div className={`flex ${isSearched ? "" : "flex-col"} justify-center items-center align-middle`}> 
+        <h1 className={`${isSearched ? "text-4xl" : "text-7xl"} m-6`}>Snips</h1>
+        <form
+          onSubmit={handleSubmit}
+          className={`flex items-center ${isSearched ? 'mt-4 mb-10' : 'h-full justify-center'} mb-5`} // Adjust margin based on search status
+        >
+          <input
+            type="text"
+            placeholder="Search..."
+            name="query"
+            value={query}
+            onChange={handleQuery}
+            className="p-2 border rounded mr-2 w-96" // Styling for the input
+          />
+          <button
+            type="submit"
+            className="p-2 bg-gray-950 text-white rounded border border-white" // Styling for the button
+          >
+            Search
+          </button>
+        </form>
+        <p className={isSearched ? 'hidden' : 'block'}>Nothing to show</p>
       </div>
+
+      {snips.length === 0 ? (
+        <p className="text-center"></p> // Center text
+      ) : (
+        <div className="card">
+          {snips.map((snip, index) => (
+            <div key={index} className="mb-4"> {/* Margin for separation */}
+              <h3>Language: {snip.lang}</h3>
+              <pre>
+                <CodeSnippet snip={snip} />
+              </pre>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

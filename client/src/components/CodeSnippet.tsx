@@ -26,7 +26,7 @@ const CodeSnippet: React.FC<CodeSnippetProps> = ({ snip }) => {
             <SyntaxHighlighter
                 language={snip.lang}
                 style={atomOneDark}
-                customStyle={{ background: "transparent", flex: 1 }}
+                customStyle={{ background: "transparent", flex: 1, fontWeight: 500, fontSize: 15 }}
                 showLineNumbers
                 wrapLines
             >
