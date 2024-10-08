@@ -3,7 +3,8 @@ import { RootState } from "../store/store";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { set } from "../store/path/pathSlice";
+import { AppDispatch } from "../store/store";
+import { updateCurrentRepoPath } from "../store/path/pathSlice";
 
 type UserRepoPath = {
   path: string;
@@ -17,14 +18,14 @@ const SelectRepo = () => {
   const currentRepoPath = useSelector(
     (state: RootState) => state.currentRepoPath.path
   );
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
     const {value} = event.target;
 
     setSelectPath(value);
 
-    dispatch(set(value));
+    dispatch(updateCurrentRepoPath(value));
   }
 
   const fetchUserRepoPathList = async () => {
@@ -33,7 +34,7 @@ const SelectRepo = () => {
       const data = response.data;
 
       const repoPathList = data.map((e: UserRepoPath) => e.path);
-      console.log(repoPathList);
+      console.log("Saved repo paths list: ", repoPathList);
 
       setUserRepoPathList(repoPathList);
     } catch (err) {
@@ -54,9 +55,8 @@ const SelectRepo = () => {
         Current repo: {currentRepoPath === "" ? "Not Set" : currentRepoPath}
       </h3>
 
-      {/* add a dropdown */}
       <select
-        name="gender"
+        name="repoPath"
         className="form-control"
         value={selectPath}
         onChange={handleChange}

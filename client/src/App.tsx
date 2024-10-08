@@ -3,36 +3,34 @@ import "./App.css";
 import axios from "axios";
 import { Provider } from "react-redux";
 import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
-import SearchPage from "./pages/SearchPage";
-import { store } from "./store/store";
+import SearchPage from "./Pages/SearchPage";
+import { store, AppDispatch } from "./store/store";
 import { useDispatch } from "react-redux";
-import { set } from "./store/path/pathSlice";
-import SelectRepoPage from "./pages/SelectRepoPage";
+import { updateCurrentRepoPath } from "./store/path/pathSlice";
+import SelectRepoPage from "./Pages/SelectRepoPage";
 
-// Create a new component for handling the repo fetching and navigation logic
+
 function RepoHandler() {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   const fetchCurrentRepo = async () => {
     try {
       const response = await axios.get("http://localhost:5000/current-repo");
-      console.log(response);
+      const currentRepoPath: string = response.data; 
 
-      const currentRepoPath = response.data;
-
-      dispatch(set(currentRepoPath));
-
-      console.log("Current repo path: ", currentRepoPath);
-
+      
+      console.log("Current repo path in repoHandeller: ", response);
+      
       if (currentRepoPath === "") {
         console.log("Current repo path not set");
         navigate("/select-repo");
       } else {
+        dispatch(updateCurrentRepoPath(currentRepoPath));
         navigate("/search");
       }
     } catch (error) {
-      console.error(error);
+      console.error("Error fetching current repo:", error);
     }
   };
 
