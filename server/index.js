@@ -19,7 +19,8 @@ app.get("/current-repo", (req, res) => {
 });
 
 app.post("/current-repo", (req, res) => {
-  const { repoPath } = req.repoPath;
+  const { repoPath } = req.path;
+  console.log("POST: update user currrent repo path: ", repoPath);
 
   // read the file user.json
   const data = fs.readFileSync(path.join(__dirname, "user.json"), "utf8");
