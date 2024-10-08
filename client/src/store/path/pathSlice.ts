@@ -17,7 +17,6 @@ export const updateCurrentRepoPath = createAsyncThunk(
         try {
             console.log("Sending POST request with body: ", newPath);
             const response = await axios.post("http://localhost:5000/current-repo", { newRepoPath: newPath });
-            // const response = await axios.post("http://localhost:5000/current-repo", { newPath: newPath });
             return response.data;
         } catch (err) {
             console.error("POST: Updating user current repo path failed", err);

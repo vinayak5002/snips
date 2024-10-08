@@ -1,9 +1,7 @@
 import { ChangeEvent, useEffect, useState } from "react";
-import { RootState } from "../store/store";
-import { useSelector } from "react-redux";
 import axios from "axios";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "../store/store";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState, AppDispatch } from "../store/store";
 import { updateCurrentRepoPath } from "../store/path/pathSlice";
 
 type UserRepoPath = {
