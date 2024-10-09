@@ -20,7 +20,7 @@ const SearchPage = () => {
 
     console.log("Fetching data...");
     try {
-      const response = await axios.get("http://localhost:5000/search", {
+      const response = await axios.get("http://localhost:5000/search-snips", {
         params: {
           query: query.toLowerCase(),
         },
@@ -63,7 +63,7 @@ const SearchPage = () => {
   }, []);
 
   return (
-    <div className="h-screen flex flex-col items-center justify-between"> {/* Full height for layout */}
+    <div className="h-screen flex flex-col items-center justify-start pt-10"> {/* Added pt-10 for padding top */}
       <ToastContainer
         position="top-right"
         autoClose={1000}
@@ -75,8 +75,8 @@ const SearchPage = () => {
         rtl={false}
         theme="dark"
       />
-
-      <div className={`flex ${isSearched ? "" : "flex-col"} justify-center items-center align-middle`}>
+  
+      <div className={`flex ${isSearched ? "" : "flex-col mt-60"} justify-center items-center align-middle`}>
         <h1 className={`${isSearched ? "text-4xl" : "text-7xl"} m-6`}>Snips</h1>
         <form
           onSubmit={handleSubmit}
@@ -94,7 +94,7 @@ const SearchPage = () => {
             />
             <span className="p-2">/</span>
           </div>
-
+  
           <button
             type="submit"
             className="p-2 bg-gray-950 text-white rounded border border-white"
@@ -102,9 +102,9 @@ const SearchPage = () => {
             Search
           </button>
         </form>
-        <p className={isSearched ? 'hidden' : 'block'}>Nothing to show</p>
+        <p className={isSearched ? 'hidden' : 'block'}>Search. Copy. Paste.</p>
       </div>
-
+  
       {snips.length === 0 ? (
         <p className="text-center"></p> // Center text
       ) : (

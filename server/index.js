@@ -58,7 +58,7 @@ app.get("/saved-repos", (req, res) => {
   res.send(user.repos);
 });
 
-app.get("/search", (req, res) => {
+app.get("/search-snips", (req, res) => {
   const {query} = req.query;
   console.log(query);
 
