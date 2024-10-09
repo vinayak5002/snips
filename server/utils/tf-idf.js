@@ -108,21 +108,45 @@ function cosineSimilarity(tfidf1, tfidf2) {
 
 function searchDocuments(documents, idf, query, n = 3) {
   const documentContents = documents.map(
-    (doc) => doc.filePath + " " + doc.lang + " " + doc.code
+      (doc) => doc.filePath + " " + doc.lang + " " + doc.code
   );
 
-  const queryTFIDF = calculateTFIDF(query, idf, n);
+  // Normalize the query
+  const normalizedQuery = query.toLowerCase().trim();
+  const queryTFIDF = calculateTFIDF(normalizedQuery, idf, n);
+
+  // Tokenize the query
+  const queryTokens = normalizedQuery.split(" ").filter(Boolean);
 
   // Calculate TF-IDF for each document
   const scores = documents.map((doc, index) => {
-    const docTFIDF = calculateTFIDF(documentContents[index], idf, n);
-    return {
-      document: doc,
-      score: cosineSimilarity(queryTFIDF, docTFIDF),
-    };
+      const docTFIDF = calculateTFIDF(documentContents[index], idf, n);
+      const score = cosineSimilarity(queryTFIDF, docTFIDF);
+
+      // Initialize boost
+      let boost = 0;
+
+      // Check for presence of query tokens in code and headerTree
+      const docContent = (doc.code + " " + doc.headerTree).toLowerCase();
+      
+      queryTokens.forEach(token => {
+          if (docContent.includes(token)) {
+              boost += 1; // Adjust boost value as needed
+          }
+      });
+
+      // Combine score with boost
+      const finalScore = score + boost;
+
+      console.log(`Document: ${doc.filePath}, Score: ${score}, Boost: ${boost}, Final Score: ${finalScore}`);
+
+      return {
+          document: doc,
+          score: finalScore,
+      };
   });
 
-  // Sort by score
+  // Sort by final score
   scores.sort((a, b) => b.score - a.score);
 
   // Return documents sorted by score
