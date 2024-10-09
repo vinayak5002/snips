@@ -14,13 +14,45 @@ function parseSnippetsFromFile(filePath) {
   let inSnippet = false;
   const snippets = [];
 
+  let stk = [];
+
+  const updateHeaderStack = (header) => {
+    const splitHeader = header.split(" ");
+    const level = splitHeader[0].length;
+    const title = splitHeader.slice(1).join(" ");
+
+    const newHeader = {
+      level: level,
+      title: title
+    }
+
+    while (stk.length && stk[stk.length - 1].level >= newHeader.level) {
+      stk.pop();
+    }
+
+    console.log(stk);
+    console.log(header)
+    stk.push(newHeader);
+  }
+
+  const getHeaderTree = () => {
+    if (stk.length === 0) return ""; // Handle empty stack
+    // console.log(stk)
+    return stk.map(e => e.title).join(" ");
+  }
+
   lines.forEach((line) => {
+    if (line.match(/^#+/)) {
+      updateHeaderStack(line);
+    }
+
     if (line.startsWith("```")) {
       if (inSnippet) {
         // End of snippet
         snippets.push({
           lang: snippetName,
-          code: snippet.trim(), // Ensure no trailing newline
+          code: snippet.trim(),
+          headerTree: getHeaderTree()
         });
         snippet = "";
         snippetName = "";
@@ -40,6 +72,7 @@ function parseSnippetsFromFile(filePath) {
     snippets.push({
       lang: snippetName,
       code: snippet.trim(), // Ensure no trailing newline
+      headerTree: getHeaderTree()
     });
   }
 
@@ -69,7 +102,8 @@ function readDirectoryRecursive(dir) {
           return {
             filePath: preprocess(snippetsFromFile.file), // Use original file path here
             lang: snip.lang,
-            code: snip.code, // Preprocess the code
+            code: snip.code,
+            headerTree: snip.headerTree
           };
         });
 
@@ -82,4 +116,4 @@ function readDirectoryRecursive(dir) {
 }
 
 // Export both functions
-module.exports =  { parseSnippetsFromFile, readDirectoryRecursive };
+module.exports = { parseSnippetsFromFile, readDirectoryRecursive };

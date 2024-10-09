@@ -30,8 +30,8 @@ const SearchPage = () => {
 
       const snippets: Snippet[] = response.data;
 
-      setSnips(snippets.slice(0, 15));
-      setIsSearched(true); // Set search status to true after fetching
+      setSnips(snippets.slice(0, 5));
+      setIsSearched(true);
     } catch (err) {
       console.log(err);
     }
@@ -108,7 +108,7 @@ const SearchPage = () => {
       {snips.length === 0 ? (
         <p className="text-center"></p> // Center text
       ) : (
-        <div className="card">
+        <div className="" style={{width: "50rem"}}>
           {snips.map((snip, index) => (
             <div key={index} className="mb-4">
               <h3>Language: {snip.lang}</h3>

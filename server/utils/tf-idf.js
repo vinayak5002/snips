@@ -48,7 +48,7 @@ function calculateIDF(documents, n = 3) {
   const totalDocs = documents.length;
 
   documents.forEach((document) => {
-    console.log(document)
+    // console.log(document)
     const ngrams = new Set(preprocess(document, n));
     ngrams.forEach((ngram) => {
       if (idf[ngram]) {
@@ -63,7 +63,7 @@ function calculateIDF(documents, n = 3) {
   for (let ngram in idf) {
     idf[ngram] = Math.log(totalDocs / idf[ngram]);
   }
-  console.log(idf)
+  // console.log(idf)
   return idf;
 }
 

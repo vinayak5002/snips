@@ -82,7 +82,7 @@ app.get("/search-snips", (req, res) => {
     
     // calculate the idf
     const documentContents = documentList.map(
-      (doc) => doc.filePath + " " + doc.lang + " " + doc.code
+      (doc) => doc.headerTree + " " + doc.filePath + " " + doc.lang + " " + doc.code
     );
     idf = calculateIDF(documentContents);
 
