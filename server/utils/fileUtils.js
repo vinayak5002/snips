@@ -1,10 +1,6 @@
 const fs = require('fs');
 const path = require('path');
 
-function preprocess(text) {
-  return text.replace(/[\\]+/g, ' ');
-}
-
 // Function to parse snippets from a file
 function parseSnippetsFromFile(filePath) {
   const data = fs.readFileSync(filePath, "utf8");
@@ -83,7 +79,7 @@ function parseSnippetsFromFile(filePath) {
 }
 
 // Function to recursively read files in a directory
-function readDirectoryRecursive(dir) {
+function readDirectoryRecursive(dir, rootPath) {
   let results = [];
   const list = fs.readdirSync(dir);
 
@@ -92,15 +88,20 @@ function readDirectoryRecursive(dir) {
     const stat = fs.lstatSync(filePath);
 
     if (stat.isDirectory()) {
-      results = results.concat(readDirectoryRecursive(filePath)); // Recursively read subdirectory
+      results = results.concat(readDirectoryRecursive(filePath, rootPath)); // Recursively read subdirectory
     } else {
       // If it is a markdown file, parse it
       if (file.endsWith(".md")) {
         const snippetsFromFile = parseSnippetsFromFile(filePath);
 
         const snippetDocuments = snippetsFromFile.snippets.map((snip) => {
+
+          const splitCurrentRepoPath = rootPath.split("\\");
+          const splitFilePath = snippetsFromFile.file.split("\\");
+          const filePath = splitFilePath.filter(item => !splitCurrentRepoPath.includes(item)).join(" ");
+
           return {
-            filePath: preprocess(snippetsFromFile.file), // Use original file path here
+            filePath: filePath,
             lang: snip.lang,
             code: snip.code,
             headerTree: snip.headerTree

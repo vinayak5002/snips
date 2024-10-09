@@ -78,12 +78,14 @@ app.get("/search-snips", (req, res) => {
   // check if the repo is already indexed
   if (!fs.existsSync(idfFileName) || !fs.existsSync(documentFileName)) {
     // get the documents in the repo
-    documentList = readDirectoryRecursive(currentRepo);
+    documentList = readDirectoryRecursive(currentRepo, currentRepo);
     
-    // calculate the idf
+    // convert documents into text
     const documentContents = documentList.map(
       (doc) => doc.headerTree + " " + doc.filePath + " " + doc.lang + " " + doc.code
     );
+
+    // calculating idfs using the documents
     idf = calculateIDF(documentContents);
 
     // save the idf and document list 
