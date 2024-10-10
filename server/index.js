@@ -102,6 +102,36 @@ app.get("/search-snips", (req, res) => {
   const results = searchDocuments(documentList, idf, query);
 
   res.send(results);
+});
+
+app.post("/re-index", (req, res) => {
+  // read the file user.json
+  const data = fs.readFileSync(path.join(__dirname, "user.json"), "utf8");
+  const user = JSON.parse(data);
+
+  const currentRepoPath = user.currentRepoPath;
+  const repoId = user.repos.findIndex((repo) => repo.path === currentRepoPath);
+
+  // file paths for saving idf and document list
+  const idfFileName = path.join(__dirname, "idfs", `idf-${repoId}.json`);
+  const documentFileName = path.join(__dirname, "documents", `documents-${repoId}.json`);
+
+  // get the documents in the repo
+  const documentList = readDirectoryRecursive(currentRepoPath, currentRepoPath);
+
+  // convert documents into text
+  const documentContents = documentList.map(
+    (doc) => doc.headerTree + " " + doc.filePath + " " + doc.lang + " " + doc.code
+  );
+
+  // calculating idfs using the documents
+  const idf = calculateIDF(documentContents);
+
+  // save the idf and document list
+  fs.writeFileSync(idfFileName, JSON.stringify(idf, null, 2));
+  fs.writeFileSync(documentFileName, JSON.stringify(documentList, null, 2));
+
+  res.send("Re-indexed");
 })
 
 app.listen(port, () => {

@@ -1,5 +1,5 @@
-import { useSelector, useDispatch } from "react-redux";
-import { RootState, AppDispatch } from "../store/store";
+import { useSelector } from "react-redux";
+import { RootState} from "../store/store";
 
 const Footer = () => {
 

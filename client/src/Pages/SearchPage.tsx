@@ -65,7 +65,7 @@ const SearchPage = () => {
   return (
     <div className="h-auto flex flex-col items-center justify-start"> {/* Added pt-10 for padding top */}
       <ToastContainer
-        position="top-right"
+        position="bottom-right"
         autoClose={1000}
         hideProgressBar={true}
         newestOnTop={true}
