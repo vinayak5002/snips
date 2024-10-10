@@ -1,0 +1,24 @@
+import { useSelector, useDispatch } from "react-redux";
+import { RootState, AppDispatch } from "../store/store";
+
+const Footer = () => {
+
+	const currentRepoPath = useSelector(
+		(state: RootState) => state.currentRepoPath.path,
+	)
+
+	return (
+		<nav className="bg-secondary py-4 flex justify-between">
+			<div className="container mx-auto flex justify-between">
+				<div className="text-white font-bold text-lg"></div>
+				<ul className="flex space-x-4">
+					<li>
+						<a href="/contact" className="text-white bg-secondary hover:bg-black px-3 py-2 rounded">Current repo: {currentRepoPath}</a>
+					</li>
+				</ul>
+			</div>
+		</nav>
+	);
+}
+
+export default Footer;

@@ -63,7 +63,7 @@ const SearchPage = () => {
   }, []);
 
   return (
-    <div className="h-screen flex flex-col items-center justify-start pt-10"> {/* Added pt-10 for padding top */}
+    <div className="h-auto flex flex-col items-center justify-start"> {/* Added pt-10 for padding top */}
       <ToastContainer
         position="top-right"
         autoClose={1000}

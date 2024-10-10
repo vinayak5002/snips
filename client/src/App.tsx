@@ -8,6 +8,8 @@ import { store, AppDispatch } from "./store/store";
 import { useDispatch } from "react-redux";
 import { updateCurrentRepoPath } from "./store/path/pathSlice";
 import SelectRepoPage from "./pages/SelectRepoPage";
+import Navbar from "./sections/navBar";
+import Footer from "./sections/footer";
 
 
 function RepoHandler() {
@@ -44,14 +46,20 @@ function RepoHandler() {
 function App() {
   return (
     <Provider store={store}>
-       <StrictMode>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<RepoHandler />} />
-            <Route path="/search" element={<SearchPage />} />
-            <Route path="/select-repo" element={<SelectRepoPage />} />
-          </Routes>
-        </BrowserRouter>
+      <StrictMode>
+        <div className="flex flex-col min-h-screen"> {/* Flex container with full height */}
+          <Navbar />
+          <main className="flex-grow"> {/* Main content area */}
+            <BrowserRouter>
+              <Routes>
+                <Route path="/" element={<RepoHandler />} />
+                <Route path="/search" element={<SearchPage />} />
+                <Route path="/select-repo" element={<SelectRepoPage />} />
+              </Routes>
+            </BrowserRouter>
+          </main>
+          <Footer /> {/* Footer stays at the bottom */}
+        </div>
       </StrictMode>
     </Provider>
   );
