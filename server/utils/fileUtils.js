@@ -1,5 +1,5 @@
-const fs = require('fs');
-const path = require('path');
+const fs = require("fs");
+const path = require("path");
 
 // Function to parse snippets from a file
 function parseSnippetsFromFile(filePath) {
@@ -19,23 +19,23 @@ function parseSnippetsFromFile(filePath) {
 
     const newHeader = {
       level: level,
-      title: title
-    }
+      title: title,
+    };
 
     while (stk.length && stk[stk.length - 1].level >= newHeader.level) {
       stk.pop();
     }
 
     console.log(stk);
-    console.log(header)
+    console.log(header);
     stk.push(newHeader);
-  }
+  };
 
   const getHeaderTree = () => {
     if (stk.length === 0) return ""; // Handle empty stack
     // console.log(stk)
-    return stk.map(e => e.title).join(" ");
-  }
+    return stk.map((e) => e.title).join(" ");
+  };
 
   lines.forEach((line) => {
     if (line.match(/^#+/)) {
@@ -48,7 +48,7 @@ function parseSnippetsFromFile(filePath) {
         snippets.push({
           lang: snippetName,
           code: snippet.trim(),
-          headerTree: getHeaderTree()
+          headerTree: getHeaderTree(),
         });
         snippet = "";
         snippetName = "";
@@ -68,7 +68,7 @@ function parseSnippetsFromFile(filePath) {
     snippets.push({
       lang: snippetName,
       code: snippet.trim(), // Ensure no trailing newline
-      headerTree: getHeaderTree()
+      headerTree: getHeaderTree(),
     });
   }
 
@@ -79,7 +79,7 @@ function parseSnippetsFromFile(filePath) {
 }
 
 // Function to recursively read files in a directory
-function readDirectoryRecursive(dir, rootPath) {
+function readDirectoryRecursive(dir, rootPath, endsWith = ["md"]) {
   let results = [];
   const list = fs.readdirSync(dir);
 
@@ -91,20 +91,21 @@ function readDirectoryRecursive(dir, rootPath) {
       results = results.concat(readDirectoryRecursive(filePath, rootPath)); // Recursively read subdirectory
     } else {
       // If it is a markdown file, parse it
-      if (file.endsWith(".md")) {
+      if (file.split(".").at(-1).includes(endsWith)) {
         const snippetsFromFile = parseSnippetsFromFile(filePath);
 
         const snippetDocuments = snippetsFromFile.snippets.map((snip) => {
-
           const splitCurrentRepoPath = rootPath.split("\\");
           const splitFilePath = snippetsFromFile.file.split("\\");
-          const filePath = splitFilePath.filter(item => !splitCurrentRepoPath.includes(item)).join(" ");
+          const filePath = splitFilePath
+            .filter((item) => !splitCurrentRepoPath.includes(item))
+            .join(" ");
 
           return {
             filePath: filePath,
             lang: snip.lang,
             code: snip.code,
-            headerTree: snip.headerTree
+            headerTree: snip.headerTree,
           };
         });
 
