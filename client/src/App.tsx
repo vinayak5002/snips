@@ -19,11 +19,11 @@ function RepoHandler() {
   const fetchCurrentRepo = async () => {
     try {
       const response = await axios.get("http://localhost:5000/current-repo");
-      const currentRepoPath: string = response.data; 
+      const currentRepoPath: string = response.data;
 
-      
+
       console.log("Current repo path in repoHandeller: ", response);
-      
+
       if (currentRepoPath === "") {
         console.log("Current repo path not set");
         navigate("/select-repo");
@@ -40,7 +40,7 @@ function RepoHandler() {
     fetchCurrentRepo();
   }, [dispatch]);
 
-  return null; 
+  return null;
 }
 
 function App() {

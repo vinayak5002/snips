@@ -1,8 +1,11 @@
 {
-  "currentRepoPath": "C:\\Users\\srinivas.m13\\Documents\\Punk_records",
+  "currentRepoPath": "/home/nandhu/Documents/codesnippets",
   "repos": [
     {
       "path": "C:\\Users\\srinivas.m13\\Documents\\Punk_records"
+    },
+    {
+      "path": "/home/nandhu/Documents/codesnippets"
     }
   ]
 }
