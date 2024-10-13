@@ -1,45 +1,48 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+import snipsApi from "../../api/snipsApi";
 
 type PathState = {
-    path: string;
+  path: string;
 };
 
 const savedCurrentRepoPath = localStorage.getItem("currentRepoPath");
 
 const initialState: PathState = {
-    path: savedCurrentRepoPath ? savedCurrentRepoPath : ""
+  path: savedCurrentRepoPath ? savedCurrentRepoPath : "",
 };
 
 export const updateCurrentRepoPath = createAsyncThunk(
-    "currentRepoPath/updateCurrentRepoPath",
-    async (newPath: string) => {
-        try {
-            console.log("Sending POST request with body: ", newPath);
-            const response = await axios.post("http://localhost:5000/current-repo", { newRepoPath: newPath });
-            return response.data;
-        } catch (err) {
-            console.error("POST: Updating user current repo path failed", err);
-            throw new Error("Failed to update path");
-        }
+  "currentRepoPath/updateCurrentRepoPath",
+  async (newPath: string) => {
+    try {
+      console.log("Sending POST request with body: ", newPath);
+      const data = await snipsApi.setCurrentRepo(newPath);
+      return data;
+    } catch (err) {
+      console.error("POST: Updating user current repo path failed", err);
+      throw new Error("Failed to update path");
     }
+  }
 );
 
 const PathSlice = createSlice({
-    name: "currentRepoPath",
-    initialState,
-    reducers: {},
+  name: "currentRepoPath",
+  initialState,
+  reducers: {},
 
-    extraReducers: (builder) => {
-        builder.addCase(updateCurrentRepoPath.fulfilled, (state: PathState, action: PayloadAction<string>) => {
-            state.path = action.payload;
-            localStorage.setItem("currentRepoPath", action.payload);
-            console.log("POST: Updating user current repo path succeeded");
-        });
-        builder.addCase(updateCurrentRepoPath.rejected, (state, action) => {
-            console.error("Failed to update path", state.path, action.error);
-        });
-    }
+  extraReducers: (builder) => {
+    builder.addCase(
+      updateCurrentRepoPath.fulfilled,
+      (state: PathState, action: PayloadAction<string>) => {
+        state.path = action.payload;
+        localStorage.setItem("currentRepoPath", action.payload);
+        console.log("POST: Updating user current repo path succeeded");
+      }
+    );
+    builder.addCase(updateCurrentRepoPath.rejected, (state, action) => {
+      console.error("Failed to update path", state.path, action.error);
+    });
+  },
 });
 
 export default PathSlice.reducer;

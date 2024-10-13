@@ -1,16 +1,19 @@
-import axios from "axios";
 import { useState } from "react";
 import ClockLoader from "react-spinners/ClockLoader";
+import snipsApi from "../api/snipsApi";
+import { useLocation } from "react-router-dom";
 
 const Navbar = () => {
 	const [loading, setLoading] = useState(false);
+	const location = useLocation()
+	const isSelectRepoPath = location.pathname === "/select-repo"
 
 	const reIndexRepo = async () => {
 		setLoading(true);
-		
+
 		try {
-			const response = await axios.post("http://localhost:5000/re-index");
-			console.log(response);
+			const data = await snipsApi.reindexDocuments()
+			console.log(data);
 		}
 		catch (err) {
 			console.log(err);
@@ -32,17 +35,22 @@ const Navbar = () => {
 						>
 							Re-index repo
 							<div className={`ml-2 ${loading ? "block" : "hidden"}`}>
-								<ClockLoader color="#fff" size={15} loading={loading}/>
+								<ClockLoader color="#fff" size={15} loading={loading} />
 							</div>
 						</a>
 					</li>
 					<li>
-						<a
+						{!isSelectRepoPath ? <a
 							href="/select-repo"
 							className="flex items-center text-white bg-secondary hover:bg-black px-3 py-2 rounded" // Added flex for consistency
 						>
 							Change repo
-						</a>
+						</a> : <a
+							href="/"
+							className="flex items-center text-white bg-secondary hover:bg-black px-3 py-2 rounded" // Added flex for consistency
+						>
+							Home
+						</a>}
 					</li>
 				</ul>
 

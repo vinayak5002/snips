@@ -1,5 +1,5 @@
 import { ChangeEvent, useEffect, useState } from "react";
-import axios from "axios";
+import snipsApi from "../api/snipsApi";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState, AppDispatch } from "../store/store";
 import { updateCurrentRepoPath } from "../store/path/pathSlice";
@@ -19,7 +19,7 @@ const SelectRepo = () => {
   const dispatch = useDispatch<AppDispatch>();
 
   const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
-    const {value} = event.target;
+    const { value } = event.target;
 
     setSelectPath(value);
 
@@ -28,9 +28,7 @@ const SelectRepo = () => {
 
   const fetchUserRepoPathList = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/saved-repos");
-      const data = response.data;
-
+      const data = await snipsApi.getSavedSnips();
       const repoPathList = data.map((e: UserRepoPath) => e.path);
       console.log("Saved repo paths list: ", repoPathList);
 
