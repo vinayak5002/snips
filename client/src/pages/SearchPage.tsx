@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Snippet } from "../types/types";
-import axios from "axios";
+import snipsApi from "../api/snipsApi";
 import CodeSnippet from "../components/CodeSnippet";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -20,16 +20,9 @@ const SearchPage = () => {
 
     console.log("Fetching data...");
     try {
-      const response = await axios.get("http://localhost:5000/search-snips", {
-        params: {
-          query: query.toLowerCase(),
-        },
-      });
-
-      console.log(response);
-
-      const snippets: Snippet[] = response.data;
-
+      const data = await snipsApi.searchSnips(query.toLowerCase())
+      console.log(data);
+      const snippets: Snippet[] = data;
       setSnips(snippets.slice(0, 5));
       setIsSearched(true);
     } catch (err) {
@@ -50,8 +43,8 @@ const SearchPage = () => {
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === '/') {
-        e.preventDefault(); 
-        inputRef.current?.focus(); 
+        e.preventDefault();
+        inputRef.current?.focus();
       }
     };
 
@@ -75,7 +68,7 @@ const SearchPage = () => {
         rtl={false}
         theme="dark"
       />
-  
+
       <div className={`flex ${isSearched ? "" : "flex-col mt-60"} justify-center items-center align-middle`}>
         <h1 className={`${isSearched ? "text-4xl" : "text-7xl"} m-6`}>Snips</h1>
         <form
@@ -94,7 +87,7 @@ const SearchPage = () => {
             />
             <span className="p-2">/</span>
           </div>
-  
+
           <button
             type="submit"
             className="p-2 bg-gray-950 text-white rounded border border-white"
@@ -104,11 +97,11 @@ const SearchPage = () => {
         </form>
         <p className={isSearched ? 'hidden' : 'block'}>Search. Copy. Paste.</p>
       </div>
-  
+
       {snips.length === 0 ? (
         <p className="text-center"></p> // Center text
       ) : (
-        <div className="" style={{width: "50rem"}}>
+        <div className="" style={{ width: "50rem" }}>
           {snips.map((snip, index) => (
             <div key={index} className="mb-4">
               <h3>Language: {snip.lang}</h3>
