@@ -3,6 +3,7 @@ const path = require("path");
 
 const { readDirectoryRecursive } = require("../utils/fileUtils.js");
 const { searchDocuments, calculateIDF } = require("../utils/tf-idf.js");
+const { checkIsDirectoryExists } = require("../utils/utils.js");
 
 const getCurrentRepo = (req, res) => {
   const data = fs.readFileSync(path.join(__dirname, "../user.json"), "utf8");
@@ -135,10 +136,46 @@ const reindexDocuments = (req, res) => {
   res.send("Re-indexed");
 };
 
+const checkRepoPath = (req, res) => {
+  const { repoPath } = req.query;
+
+  if (!repoPath) {
+    return res.status(400).send("Path is required");
+  }
+
+  res.send(checkIsDirectoryExists(repoPath));
+}
+
+const addRepo = (req, res) => {
+  const { repoPath } = req.body;
+
+  console.log(repoPath)
+
+  if (!repoPath) {
+    return res.status(400).send("Path is required");
+  }
+
+  // read the file user.json
+  const data = fs.readFileSync(path.join(__dirname, "../user.json"), "utf8");
+  const user = JSON.parse(data);
+
+  user.repos.push({ path: repoPath });
+
+  // Write the updated user object back to the file
+  fs.writeFileSync(
+    path.join(__dirname, "../user.json"),
+    JSON.stringify(user, null, 2)
+  );
+
+  res.send(user.repos);
+}
+
 module.exports = {
   getCurrentRepo,
   setCurrentRepo,
   getSavedRepos,
   searchSnips,
   reindexDocuments,
+  checkRepoPath,
+  addRepo
 };

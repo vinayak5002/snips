@@ -10,6 +10,18 @@ const ensureDirectoryExists = (dir) => {
   }
 };
 
+const checkIsDirectoryExists = (dir) => {
+  console.log(`Checking if directory exists: ${dir}`);
+  if (!fs.existsSync(dir)) {
+    console.log(`Directory does not exist: ${dir}`);
+    return false;
+  } else {
+    console.log(`Directory exists: ${dir}`);
+    return true;
+  }
+}
+
 module.exports = {
   ensureDirectoryExists,
+  checkIsDirectoryExists
 };

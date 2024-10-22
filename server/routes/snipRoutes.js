@@ -10,5 +10,7 @@ router.post("/current-repo", snipsController.setCurrentRepo);
 router.get("/saved-repos", snipsController.getSavedRepos);
 router.get("/search-snips", snipsController.searchSnips);
 router.get("/re-index", snipsController.reindexDocuments);
+router.get("/check-repo-path", snipsController.checkRepoPath);
+router.post("/add-repo", snipsController.addRepo);
 
 module.exports = router;

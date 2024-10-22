@@ -60,6 +60,32 @@ async function setCurrentRepo(newRepoPath: string) {
   }
 }
 
+async function checkRepoPath(repoPath: string) {
+  try {
+    console.log("Checking path: ", repoPath);
+    const response = await apiClient.get("/check-repo-path", {
+      params: {
+        repoPath: repoPath,
+      },
+    });
+    console.log("response.data: ", response.data);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+}
+
+async function addRepoPath(repoPath: string) {
+  try {
+    const response = await apiClient.post("/add-repo", {
+      repoPath: repoPath,
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+}
+
 export default {
   searchSnips,
   getSavedSnips,
@@ -67,4 +93,6 @@ export default {
   getSavedRepos,
   setCurrentRepo,
   getCurrentRepo,
+  checkRepoPath,
+  addRepoPath
 };
