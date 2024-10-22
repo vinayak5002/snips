@@ -31,6 +31,15 @@ async function reindexDocuments() {
   }
 }
 
+async function getSavedRepos() {
+  try {
+    const response = await apiClient.get("/saved-repos");
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+}
+
 async function getCurrentRepo() {
   try {
     const response = await apiClient.get("/current-repo");
@@ -55,6 +64,7 @@ export default {
   searchSnips,
   getSavedSnips,
   reindexDocuments,
+  getSavedRepos,
   setCurrentRepo,
   getCurrentRepo,
 };

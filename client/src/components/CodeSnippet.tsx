@@ -42,4 +42,4 @@ const CodeSnippet: React.FC<CodeSnippetProps> = ({ snip }) => {
     );
 };
 
-export default CodeSnippet;
+export default React.memo(CodeSnippet);

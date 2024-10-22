@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "deploy": "cd ../client && npm run build && cd ../server && npm run start",
-    "start": "node index.js",
+    "start": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

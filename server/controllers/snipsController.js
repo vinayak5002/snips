@@ -33,7 +33,7 @@ const setCurrentRepo = (req, res) => {
 
   // Write the updated user object back to the file
   fs.writeFileSync(
-    path.join(__dirname, "user.json"),
+    path.join(__dirname, "../user.json"),
     JSON.stringify(user, null, 2)
   );
 
@@ -41,6 +41,7 @@ const setCurrentRepo = (req, res) => {
 };
 
 const getSavedRepos = (req, res) => {
+  console.log("GET: /saved-repos");
   const data = fs.readFileSync(path.join(__dirname, "../user.json"), "utf-8");
   const user = JSON.parse(data);
 

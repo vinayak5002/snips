@@ -7,7 +7,7 @@ router.get("/", (req, res) => {
 });
 router.get("/current-repo", snipsController.getCurrentRepo);
 router.post("/current-repo", snipsController.setCurrentRepo);
-router.post("/saved-repos", snipsController.getSavedRepos);
+router.get("/saved-repos", snipsController.getSavedRepos);
 router.get("/search-snips", snipsController.searchSnips);
 router.get("/re-index", snipsController.reindexDocuments);
 

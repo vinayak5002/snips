@@ -24,11 +24,13 @@ const SelectRepo = () => {
     setSelectPath(value);
 
     dispatch(updateCurrentRepoPath(value));
+
+    snipsApi.setCurrentRepo(value);
   }
 
   const fetchUserRepoPathList = async () => {
     try {
-      const data = await snipsApi.getSavedSnips();
+      const data = await snipsApi.getSavedRepos();
       const repoPathList = data.map((e: UserRepoPath) => e.path);
       console.log("Saved repo paths list: ", repoPathList);
 

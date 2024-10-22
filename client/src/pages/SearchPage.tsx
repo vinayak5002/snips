@@ -78,6 +78,7 @@ const SearchPage = () => {
           <div className="flex items-center border rounded w-96 mr-2">
             <input
               ref={inputRef}
+              autoComplete="off"
               type="text"
               placeholder="Search..."
               name="query"
