@@ -1,7 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 
-const { readDirectoryRecursive } = require("../utils/fileUtils.js");
+const { reIndexRepo } = require("../utils/utils.js");
 const { searchDocuments, calculateIDF } = require("../utils/tf-idf.js");
 const { checkIsDirectoryExists } = require("../utils/utils.js");
 
@@ -73,23 +73,11 @@ const searchSnips = (req, res) => {
   var documentList;
 
   // check if the repo is already indexed
-  if (!fs.existsSync(idfFileName) || !fs.existsSync(documentFileName)) {
-    // get the documents in the repo
-    documentList = readDirectoryRecursive(currentRepo, currentRepo);
+  if (!fs.existsSync(idfFileName) || !fs.existsSync(documentFileName)) { // if not indexed
 
-    // convert documents into text
-    const documentContents = documentList.map(
-      (doc) =>
-        doc.headerTree + " " + doc.filePath + " " + doc.lang + " " + doc.code
-    );
+    reIndexRepo(currentRepo, idfFileName, documentFileName);
 
-    // calculating idfs using the documents
-    idf = calculateIDF(documentContents);
-
-    // save the idf and document list
-    fs.writeFileSync(idfFileName, JSON.stringify(idf, null, 2));
-    fs.writeFileSync(documentFileName, JSON.stringify(documentList, null, 2));
-  } else {
+  } else { // if indexed
     // read the idf and document list if its already saved
     idf = JSON.parse(fs.readFileSync(idfFileName, "utf8"));
     documentList = JSON.parse(fs.readFileSync(documentFileName, "utf8"));
@@ -117,21 +105,7 @@ const reindexDocuments = (req, res) => {
     `documents-${repoId}.json`
   );
 
-  // get the documents in the repo
-  const documentList = readDirectoryRecursive(currentRepoPath, currentRepoPath);
-
-  // convert documents into text
-  const documentContents = documentList.map(
-    (doc) =>
-      doc.headerTree + " " + doc.filePath + " " + doc.lang + " " + doc.code
-  );
-
-  // calculating idfs using the documents
-  const idf = calculateIDF(documentContents);
-
-  // save the idf and document list
-  fs.writeFileSync(idfFileName, JSON.stringify(idf, null, 2));
-  fs.writeFileSync(documentFileName, JSON.stringify(documentList, null, 2));
+  reIndexRepo(currentRepoPath, idfFileName, documentFileName);
 
   res.send("Re-indexed");
 };
@@ -170,6 +144,65 @@ const addRepo = (req, res) => {
   res.send(user.repos);
 }
 
+const getHeaderSection = (req, res) => {
+  const { lineNumber, filePath } = req.query;
+
+  if (typeof lineNumber !== 'string' || !filePath) {
+    return res.status(400).send('Invalid request parameters.');
+  }
+
+  const lineNum = parseInt(lineNumber, 10);
+  if (isNaN(lineNum)) {
+    return res.status(400).send('Line number must be a valid integer.');
+  }
+
+  let section = "";
+
+  try {
+    const data = fs.readFileSync(filePath, "utf8");
+    const lines = data.split("\n");
+
+    if (lineNum < 0 || lineNum >= lines.length) {
+      return res.status(400).send('Line number out of bounds.');
+    }
+
+    const headerLevel = (lines[lineNum].match(/^#+/) || [''])[0].length;
+
+    for (let i = lineNum + 1; i < lines.length; i++) {
+      const line = lines[i];
+
+      if (line.match(/^#+/)) {
+        if (line.match(/^#+/)[0].length >= headerLevel) {
+          break;
+        }
+      } else {
+        section += line + "\n";
+      }
+    }
+
+    res.send(section);
+  } catch (error) {
+    console.error('Error reading file:', error);
+    res.status(500).send('Internal server error.');
+  }
+}
+
+const getFile = (req, res) => {
+  const { filePath } = req.query;
+
+  if (!filePath) {
+    return res.status(400).send('File path is required.');
+  }
+
+  try {
+    const data = fs.readFileSync(filePath, "utf8");
+    res.send(data);
+  } catch (error) {
+    console.error('Error reading file:', error);
+    res.status(500).send('Internal server error.');
+  }
+}
+
 module.exports = {
   getCurrentRepo,
   setCurrentRepo,
@@ -177,5 +210,7 @@ module.exports = {
   searchSnips,
   reindexDocuments,
   checkRepoPath,
-  addRepo
+  addRepo,
+  getHeaderSection,
+  getFile
 };

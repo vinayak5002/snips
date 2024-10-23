@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { Snippet } from "../types/types";
 import snipsApi from "../api/snipsApi";
-import CodeSnippet from "../components/CodeSnippet";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Oval, TailSpin } from "react-loader-spinner";
+import { Oval } from "react-loader-spinner";
+import SearchResult from "../components/SearchResult";
 
 const SearchPage = () => {
   const [snips, setSnips] = useState<Snippet[]>([]);
@@ -114,7 +114,7 @@ const SearchPage = () => {
               wrapperClass=""
             />
           </div>
-        </form> 
+        </form>
         <p className={isSearched ? 'hidden' : 'block'}>Search. Copy. Paste.</p>
         <div className="mt-4">
           <Oval
@@ -131,16 +131,11 @@ const SearchPage = () => {
       </div>
 
       {snips.length === 0 ? (
-        <p className="text-center"></p> // Center text
+        <></>
       ) : (
-        <div className="" style={{ width: "50rem" }}>
+        <div className="flex flex-col items-center w-[80%]">
           {snips.map((snip, index) => (
-            <div key={index} className="mb-4">
-              <h3>Language: {snip.lang}</h3>
-              <pre>
-                <CodeSnippet snip={snip} />
-              </pre>
-            </div>
+            <SearchResult key={index} snip={snip} index={index} />
           ))}
         </div>
       )}

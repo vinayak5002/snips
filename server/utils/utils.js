@@ -1,4 +1,6 @@
 const fs = require("fs");
+const { readDirectoryRecursive } = require("./fileUtils");
+const { calculateIDF } = require("./tf-idf");
 
 const ensureDirectoryExists = (dir) => {
   if (!fs.existsSync(dir)) {
@@ -21,7 +23,26 @@ const checkIsDirectoryExists = (dir) => {
   }
 }
 
+const reIndexRepo = (repoPath, idfFileName, documentFileName) => {
+  // get the documents in the repo
+  documentList = readDirectoryRecursive(repoPath, repoPath);
+
+  // convert documents into text
+  const documentContents = documentList.map(
+    (doc) =>
+      doc.headerTree + " " + doc.filePath + " " + doc.lang + " " + doc.code
+  );
+
+  // calculating idfs using the documents
+  idf = calculateIDF(documentContents);
+
+  // save the idf and document list
+  fs.writeFileSync(idfFileName, JSON.stringify(idf, null, 2));
+  fs.writeFileSync(documentFileName, JSON.stringify(documentList, null, 2));
+}
+
 module.exports = {
   ensureDirectoryExists,
-  checkIsDirectoryExists
+  checkIsDirectoryExists,
+  reIndexRepo
 };

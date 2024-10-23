@@ -12,7 +12,7 @@ function parseSnippetsFromFile(filePath) {
 
   let stk = [];
 
-  const updateHeaderStack = (header) => {
+  const updateHeaderStack = (header, lineNumber) => {
     const splitHeader = header.split(" ");
     const level = splitHeader[0].length;
     const title = splitHeader.slice(1).join(" ");
@@ -20,6 +20,7 @@ function parseSnippetsFromFile(filePath) {
     const newHeader = {
       level: level,
       title: title,
+      lineNumber: lineNumber,
     };
 
     while (stk.length && stk[stk.length - 1].level >= newHeader.level) {
@@ -37,9 +38,15 @@ function parseSnippetsFromFile(filePath) {
     return stk.map((e) => e.title).join(" ");
   };
 
-  lines.forEach((line) => {
+  const getHeaderLine = () => {
+    if (stk.length === 0) return ""; // Handle empty stack
+    console.log(stk[stk.length - 1]);
+    return stk[stk.length - 1].lineNumber;
+  };
+
+  lines.forEach((line, index) => {
     if (line.match(/^#+/)) {
-      updateHeaderStack(line);
+      updateHeaderStack(line ,index);
     }
 
     if (line.startsWith("```")) {
@@ -49,6 +56,7 @@ function parseSnippetsFromFile(filePath) {
           lang: snippetName,
           code: snippet.trim(),
           headerTree: getHeaderTree(),
+          headerLine: getHeaderLine(),
         });
         snippet = "";
         snippetName = "";
@@ -106,6 +114,10 @@ function readDirectoryRecursive(dir, rootPath, endsWith = ["md"]) {
             lang: snip.lang,
             code: snip.code,
             headerTree: snip.headerTree,
+            metaData: {
+              headerLine: snip.headerLine,
+              actualFilePath: snippetsFromFile.file,
+            }
           };
         });
 

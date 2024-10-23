@@ -19,10 +19,7 @@ const CodeSnippet: React.FC<CodeSnippetProps> = ({ snip }) => {
     };
 
     return (
-        <div style={{ position: 'relative', padding: '10px', border: '1px solid #ccc', borderRadius: '5px', marginBottom: '10px', display: 'flex', alignItems: 'flex-start' }}>
-            {/* <pre style={{ margin: 0, flex: 1, fontSize: 15 }}>
-                <code>{code}</code>
-            </pre> */}
+        <div className="bg-primary" style={{ position: 'relative', padding: '10px', border: '1px solid #ccc', borderRadius: '5px', marginBottom: '10px', display: 'flex', alignItems: 'flex-start' }}>
             <SyntaxHighlighter
                 language={snip.lang}
                 style={atomOneDark}

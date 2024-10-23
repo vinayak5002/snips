@@ -133,7 +133,7 @@ const SelectRepo = () => {
   return (
     <div id="select-repo-page">
 
-      <div className="min-h-screen bg-primary text-white flex flex-col items-start justify-start p-5">
+      <div className="min-h-screen bg-primary text-white flex flex-col items-start  p-5">
         <ToastContainer
           position="bottom-right"
           autoClose={1000}

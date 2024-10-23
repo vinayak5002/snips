@@ -86,6 +86,19 @@ async function addRepoPath(repoPath: string) {
   }
 }
 
+async function getFileContent(filePath: string) {
+  try {
+    const response = await apiClient.get('/get-file/', {
+      params: {
+        filePath: filePath
+      }
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+}
+
 export default {
   searchSnips,
   getSavedSnips,
@@ -94,5 +107,6 @@ export default {
   setCurrentRepo,
   getCurrentRepo,
   checkRepoPath,
-  addRepoPath
+  addRepoPath,
+  getFileContent
 };
