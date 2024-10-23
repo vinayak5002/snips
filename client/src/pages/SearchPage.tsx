@@ -4,11 +4,13 @@ import snipsApi from "../api/snipsApi";
 import CodeSnippet from "../components/CodeSnippet";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Oval, TailSpin } from "react-loader-spinner";
 
 const SearchPage = () => {
   const [snips, setSnips] = useState<Snippet[]>([]);
   const [query, setQuery] = useState<string>("");
   const [isSearched, setIsSearched] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const inputRef = useRef<HTMLInputElement | null>(null);
 
   const handleQuery = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -19,6 +21,9 @@ const SearchPage = () => {
     if (query === "") return;
 
     console.log("Fetching data...");
+
+    setIsLoading(true);
+
     try {
       const data = await snipsApi.searchSnips(query.toLowerCase())
       console.log(data);
@@ -28,6 +33,8 @@ const SearchPage = () => {
     } catch (err) {
       console.log(err);
     }
+
+    setIsLoading(false);
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -95,8 +102,32 @@ const SearchPage = () => {
           >
             Search
           </button>
-        </form>
+          <div className="ml-2">
+            <Oval
+              visible={isLoading && isSearched}
+              height="30"
+              width="30"
+              color="#ffffff"
+              secondaryColor="#444444"
+              ariaLabel="tail-spin-loading"
+              wrapperStyle={{}}
+              wrapperClass=""
+            />
+          </div>
+        </form> 
         <p className={isSearched ? 'hidden' : 'block'}>Search. Copy. Paste.</p>
+        <div className="mt-4">
+          <Oval
+            visible={isLoading && !isSearched}
+            height="30"
+            width="30"
+            color="#ffffff"
+            secondaryColor="#000000"
+            ariaLabel="tail-spin-loading"
+            wrapperStyle={{}}
+            wrapperClass=""
+          />
+        </div>
       </div>
 
       {snips.length === 0 ? (

@@ -1,9 +1,11 @@
 import { useState } from "react";
-import ClockLoader from "react-spinners/ClockLoader";
+import { TailSpin } from "react-loader-spinner";
 import snipsApi from "../api/snipsApi";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+
 
 const Navbar = () => {
+	const navigator = useNavigate();
 	const [loading, setLoading] = useState(false);
 	const location = useLocation()
 	const isSelectRepoPath = location.pathname === "/select-repo"
@@ -26,7 +28,7 @@ const Navbar = () => {
 	return (
 		<nav className="bg-primary py-4">
 			<div className="container mx-auto flex justify-between items-center">
-				<div className="text-white font-bold text-lg">S</div>
+				<div onClick={() => { navigator("/") }} className="text-white font-bold text-4xl"><span>S</span></div>
 				<ul className="flex space-x-4 items-center">
 					<li>
 						<a
@@ -35,7 +37,16 @@ const Navbar = () => {
 						>
 							Re-index repo
 							<div className={`ml-2 ${loading ? "block" : "hidden"}`}>
-								<ClockLoader color="#fff" size={15} loading={loading} />
+								<TailSpin
+									visible={true}
+									height="20"
+									width="20"
+									color="#ffffff"
+									ariaLabel="tail-spin-loading"
+									radius="1"
+									wrapperStyle={{}}
+									wrapperClass=""
+								/>
 							</div>
 						</a>
 					</li>
