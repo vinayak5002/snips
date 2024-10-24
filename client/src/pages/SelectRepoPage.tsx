@@ -35,10 +35,11 @@ Modal.setAppElement('#root');
 
 type UserRepoPath = {
   path: string;
+  lastIndexed: Date
 };
 
 const SelectRepo = () => {
-  const [userRepoPathList, setUserRepoPathList] = useState<string[]>([]);
+  const [userRepoPathList, setUserRepoPathList] = useState<UserRepoPath[]>([]);
   const [selectPath, setSelectPath] = useState("");
   const folderRef = useRef<HTMLInputElement>(null);
 
@@ -84,7 +85,7 @@ const SelectRepo = () => {
     }
 
     // Check if folder path is already saved
-    const isPathPresent = userRepoPathList.includes(folderPath);
+    const isPathPresent = userRepoPathList.some((ele) => ele.path === folderPath);
 
     console.log("isPathPresent: ", isPathPresent);
 
@@ -112,14 +113,18 @@ const SelectRepo = () => {
   const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
     const { value } = event.target;
     setSelectPath(value);
+
     dispatch(updateCurrentRepoPath(value));
+
     snipsApi.setCurrentRepo(value);
   };
 
   const fetchUserRepoPathList = async () => {
+    console.log("Fetching user repo path list");
     try {
       const data = await snipsApi.getSavedRepos();
-      const repoPathList = data.map((e: UserRepoPath) => e.path);
+      console.log("User saved repos: ", data);
+      const repoPathList = data;
       setUserRepoPathList(repoPathList);
     } catch (err) {
       console.error(err);
@@ -155,8 +160,8 @@ const SelectRepo = () => {
         >
           <option value="">Current: {currentRepoPath}</option>
           {userRepoPathList.map((ele, idx) => (
-            <option value={ele} key={idx}>
-              {ele}
+            <option value={ele.path} key={idx}>
+              {ele.path}
             </option>
           ))}
         </select>

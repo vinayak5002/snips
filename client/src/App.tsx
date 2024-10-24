@@ -18,7 +18,7 @@ function RepoHandler() {
   const fetchCurrentRepo = async () => {
     try {
       const data = await snipsApi.getCurrentRepo();
-      const currentRepoPath: string = data;
+      const currentRepoPath: string = data.path;
 
       console.log("Current repo path in repoHandeller: ", data);
 

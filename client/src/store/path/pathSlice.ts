@@ -3,12 +3,15 @@ import snipsApi from "../../api/snipsApi";
 
 type PathState = {
   path: string;
+  lastIndexed: string;
 };
 
 const savedCurrentRepoPath = localStorage.getItem("currentRepoPath");
+const savedLastIndexed = localStorage.getItem("lastIndexed");
 
 const initialState: PathState = {
   path: savedCurrentRepoPath ? savedCurrentRepoPath : "",
+  lastIndexed: savedLastIndexed ? savedLastIndexed : "",
 };
 
 export const updateCurrentRepoPath = createAsyncThunk(
@@ -33,9 +36,10 @@ const PathSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(
       updateCurrentRepoPath.fulfilled,
-      (state: PathState, action: PayloadAction<string>) => {
-        state.path = action.payload;
-        localStorage.setItem("currentRepoPath", action.payload);
+      (state: PathState, action: PayloadAction<PathState>) => {
+        state.path = action.payload.path;
+        state.lastIndexed = action.payload.lastIndexed;
+        localStorage.setItem("currentRepoPath", action.payload.path);
         console.log("POST: Updating user current repo path succeeded");
       }
     );
