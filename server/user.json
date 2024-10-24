@@ -1,14 +1,17 @@
 {
-  "currentRepoPath": "C:\\Users\\srinivas.m13\\Documents\\Punk_records",
+  "currentRepoIndex": 2,
   "repos": [
     {
-      "path": "C:\\Users\\srinivas.m13\\Documents\\Punk_records"
+      "path": "C:\\Users\\srinivas.m13\\Documents\\Punk_records",
+      "lastIndexed": "2024-10-24T06:13:38.742Z"
     },
     {
-      "path": "/home/nandhu/Documents/codesnippets"
+      "path": "/home/nandhu/Documents/codesnippets",
+      "lastIndexed": null
     },
     {
-      "path": "C:\\Users\\srinivas.m13\\Documents\\Punk_records\\UI"
+      "path": "C:\\Users\\srinivas.m13\\Documents\\Punk_records\\UI",
+      "lastIndexed": "2024-10-24T08:16:12.618Z"
     }
   ]
 }
