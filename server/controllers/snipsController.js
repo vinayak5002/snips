@@ -89,7 +89,7 @@ const reindexDocuments = (req, res) => {
   // update the last indexed time
   snipsService.updateRepoLastIndexedTime(repoId);
 
-  res.send("Re-indexed");
+  res.send(snipsService.getCurrentRepo());
 };
 
 const checkRepoPath = (req, res) => {

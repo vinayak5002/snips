@@ -20,6 +20,7 @@ export const updateCurrentRepoPath = createAsyncThunk(
     try {
       console.log("Sending POST request with body: ", newPath);
       const data = await snipsApi.setCurrentRepo(newPath);
+      console.log("Updated current repo path: ", data);
       return data;
     } catch (err) {
       console.error("POST: Updating user current repo path failed", err);
@@ -31,7 +32,12 @@ export const updateCurrentRepoPath = createAsyncThunk(
 const PathSlice = createSlice({
   name: "currentRepoPath",
   initialState,
-  reducers: {},
+  reducers: {
+    setLastIndexed: (state, action) => {
+      state.lastIndexed = action.payload;
+      localStorage.setItem("lastIndexed", action.payload);
+    }
+  },
 
   extraReducers: (builder) => {
     builder.addCase(
@@ -48,5 +54,7 @@ const PathSlice = createSlice({
     });
   },
 });
+
+export const {setLastIndexed} = PathSlice.actions; // exporting of the reducers
 
 export default PathSlice.reducer;

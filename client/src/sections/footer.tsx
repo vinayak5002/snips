@@ -16,6 +16,14 @@ const Footer = () => {
 		const pastDate = new Date(dateString);
 		const seconds = Math.floor((now.getTime() - pastDate.getTime()) / 1000);
 
+		console.log("Now: ", now);
+
+		console.log("lastIndexed: ", lastIndexed);
+		console.log("dateString: ", dateString);
+		console.log("Past date: ", pastDate);
+
+		console.log("Last indexed x seconds ago: ", seconds);
+
 		let interval: number;
 
 		interval = Math.floor(seconds / 31536000); // years

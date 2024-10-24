@@ -2,6 +2,10 @@ import { useState } from "react";
 import { TailSpin } from "react-loader-spinner";
 import snipsApi from "../api/snipsApi";
 import { useLocation, useNavigate } from "react-router-dom";
+import { AppDispatch } from "../store/store";
+import { useDispatch } from "react-redux";
+import { setLastIndexed } from "../store/path/pathSlice";
+
 
 
 const Navbar = () => {
@@ -10,19 +14,23 @@ const Navbar = () => {
 	const location = useLocation()
 	const isSelectRepoPath = location.pathname === "/select-repo"
 
+	const dispatch = useDispatch<AppDispatch>();
+
 	const reIndexRepo = async () => {
 		setLoading(true);
 
 		try {
-			const data = await snipsApi.reindexDocuments()
-			console.log(data);
+			console.log("Re-indexing repo...");
+			const data = await snipsApi.reindexDocuments();
+			dispatch(setLastIndexed(data.lastIndexed));
+			console.log("Re-indexed repo: ", data);
 		}
 		catch (err) {
 			console.log(err);
 		}
 
 		setLoading(false);
-		window.location.reload();
+		// window.location.reload();
 	}
 
 	return (
