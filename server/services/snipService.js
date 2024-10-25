@@ -35,10 +35,7 @@ const getRepoIndex = (repoPath) => {
 const getCurrentRepo = () => {
 	const user = getUserObject();
 
-	const returnObj = {
-		path: user.repos[user.currentRepoIndex].path,
-		lastIndexed: user.repos[user.currentRepoIndex].lastIndexed
-	}
+	const returnObj = user.repos[user.currentRepoIndex];
 
 	console.log("return object: ", returnObj);
 	return returnObj
