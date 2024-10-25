@@ -10,4 +10,9 @@ type Snippet = {
 
 }
 
-export type { Snippet };
+type UserRepoPath = {
+  path: string;
+  lastIndexed: Date
+};
+
+export type { Snippet, UserRepoPath};

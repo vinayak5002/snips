@@ -115,7 +115,7 @@ const addRepo = (req, res) => {
 
   const newRepo = snipsService.addRepo(repoPath);
 
-  res.send(newRepo);
+  res.send(snipsService.getSavedRepos());
 }
 
 const getFile = (req, res) => {
