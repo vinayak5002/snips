@@ -1,6 +1,7 @@
 const fs = require("fs");
 const { readDirectoryRecursive } = require("./fileUtils");
 const { calculateIDF } = require("./tf-idf");
+const templates = require("../constants/templates");
 const path = require("path");
 
 const ensureDirectoryExists = (dir) => {
@@ -22,6 +23,19 @@ const checkIsDirectoryExists = (dir) => {
     console.log(`Directory exists: ${dir}`);
     return true;
   }
+}
+
+const ensureDataExists = () => {
+  dataPath = path.join(__dirname, "../", "data.json");
+
+  if (!fs.existsSync(dataPath)) {
+    fs.writeFileSync(dataPath, JSON.stringify(templates.data, null, 2));
+    console.log("Data file created");
+
+    return;
+  }
+
+  console.log("Data file already exists");
 }
 
 const reIndexRepo = (repoPath, idfFileName, documentFileName) => {
@@ -62,5 +76,6 @@ module.exports = {
   ensureDirectoryExists,
   checkIsDirectoryExists,
   reIndexRepo,
-  getIndexedFileNames
+  getIndexedFileNames,
+  ensureDataExists
 };

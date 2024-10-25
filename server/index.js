@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const path = require("path");
-const { ensureDirectoryExists } = require("./utils/utils");
+const { ensureDirectoryExists, ensureDataExists } = require("./utils/utils");
 const app = express();
 const port = 5000;
 
@@ -36,6 +36,8 @@ function init() {
 
   ensureDirectoryExists(dir1);
   ensureDirectoryExists(dir2);
+
+  ensureDataExists();
 }
 
 app.listen(port, () => {

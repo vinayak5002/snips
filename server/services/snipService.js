@@ -1,8 +1,9 @@
 const fs = require("fs");
 const path = require("path");
+const { dataFileName } = require("../constants/constants");
 
 const getUserObject = () => {
-	const data = fs.readFileSync(path.join(__dirname, "../user.json"), "utf8");
+	const data = fs.readFileSync(path.join(__dirname, "..", dataFileName), "utf8");
 	const user = JSON.parse(data);
 
 	return user;
@@ -10,7 +11,7 @@ const getUserObject = () => {
 
 const saveUserObject = (user) => {
 	fs.writeFileSync(
-		path.join(__dirname, "../user.json"),
+		path.join(__dirname, "..", dataFileName),
 		JSON.stringify(user, null, 2)
 	);
 }

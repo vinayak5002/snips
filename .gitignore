@@ -3,3 +3,5 @@ client/node_modules
 server/node_modules
 server/documents
 server/idfs
+
+server/data.json
