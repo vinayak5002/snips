@@ -12,7 +12,7 @@ type Snippet = {
 
 type UserRepoPath = {
   path: string;
-  lastIndexed: Date
+  lastIndexed: string
 };
 
 export type { Snippet, UserRepoPath};

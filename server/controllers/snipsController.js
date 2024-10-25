@@ -28,6 +28,8 @@ const setCurrentRepo = (req, res) => {
   // Set new current repo
   const currentRepo = snipsService.updateCurrentRepoIndex(newRepoPath);
 
+  const newRepoPathIndex = snipsService.getCurrentRepoIndex();
+
   // Re-index repo if not indexed
   if (currentRepo.lastIndexed === null) {
     const { idfFileName, documentFileName } = snipUtils.getIndexedFileNames(newRepoPathIndex);
@@ -134,6 +136,30 @@ const getFile = (req, res) => {
   }
 }
 
+const removeRepo = (req, res) => {
+  console.log("DELETE: /remove-repo", req.query);
+
+  const { repoPath } = req.query;
+
+  if (!repoPath) {
+    return res.status(400).send("Path is required");
+  }
+
+  try {
+    const removedRepo = snipsService.removeRepo(repoPath);
+    
+    if(!removedRepo) {
+      return res.status(404).send("Repo not found");
+    }
+    
+    res.send(removedRepo);
+  } 
+  catch (error) {
+    console.error('Error removing repo:', error);
+    res.status(400).send(error.message);
+  }
+}
+
 module.exports = {
   getCurrentRepo,
   setCurrentRepo,
@@ -142,5 +168,6 @@ module.exports = {
   reindexDocuments,
   checkRepoPath,
   addRepo,
-  getFile
+  getFile,
+  removeRepo
 };

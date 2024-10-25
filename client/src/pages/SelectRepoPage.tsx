@@ -39,7 +39,7 @@ const SelectRepo = () => {
         theme="dark"
       />
       <div className="min-h-screen bg-primary text-white flex flex-col items-start p-5 flex-1">
-        <ChangeRepo pathList={userRepoPathList}/>
+        <ChangeRepo pathList={userRepoPathList} refreshPathList={fetchUserRepoPathList}/>
       </div>
       <div className="min-h-screen bg-primary text-white flex flex-col items-start p-5 flex-1">
         <NewRepo pathList={userRepoPathList} updatePathList={setUserRepoPathList}/>

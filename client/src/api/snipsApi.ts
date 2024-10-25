@@ -99,6 +99,19 @@ async function getFileContent(filePath: string) {
   }
 }
 
+async function deleteRepo(repoPath: string) {
+  try {
+    const response = await apiClient.delete("/delete-repo", {
+      params: {
+        repoPath: repoPath,
+      }
+    });
+    return response;
+  } catch (error) {
+    throw error;
+  }
+}
+
 export default {
   searchSnips,
   getSavedSnips,
@@ -108,5 +121,6 @@ export default {
   getCurrentRepo,
   checkRepoPath,
   addRepoPath,
-  getFileContent
+  getFileContent,
+  deleteRepo
 };

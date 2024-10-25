@@ -33,7 +33,7 @@ const NewRepo = ( { pathList, updatePathList }: NewRepoProps ) => {
       return;
     }
 
-    // TODO: Validate folder path using server
+    // Validate folder path using server
     try {
       const isValid = await snipsApi.checkRepoPath(folderPath);
 
@@ -61,7 +61,7 @@ const NewRepo = ( { pathList, updatePathList }: NewRepoProps ) => {
       return;
     }
 
-    // TODO: Update new Repo path to server
+    // Update new Repo path to server
     try {
       const newUserRepoPathList = await snipsApi.addRepoPath(folderPath);
 

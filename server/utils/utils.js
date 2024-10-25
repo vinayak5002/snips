@@ -72,10 +72,18 @@ const getIndexedFileNames = (repoId) => {
   return {idfFileName, documentFileName};
 }
 
+const deleteIndexedFiles = (repoId) => {
+  const { idfFileName, documentFileName } = getIndexedFileNames(repoId);
+
+  fs.unlinkSync(idfFileName);
+  fs.unlinkSync(documentFileName);
+}
+
 module.exports = {
   ensureDirectoryExists,
   checkIsDirectoryExists,
   reIndexRepo,
   getIndexedFileNames,
-  ensureDataExists
+  ensureDataExists,
+  deleteIndexedFiles
 };
