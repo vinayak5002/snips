@@ -65,9 +65,9 @@ const SearchResult = ({ snip, index }: SearchResultProps) => {
 			</pre>
 		</div>
 		{isShowInfo && (
-			<div className="bg-secondary p-4 rounded-lg shadow-md w-2/3 ml-2 flex-grow flex flex-col">
+			<div className="bg-secondary p-4 rounded-lg shadow-md w-2/3 h-auto ml-2 flex flex-col">
 				<p className="mb-2">File path: {snip.metaData.actualFilePath}</p>
-				<div className="bg-primary flex-grow" style={{ position: 'relative', padding: '10px', border: '1px solid #ccc', borderRadius: '5px'}}>
+				<div className="bg-primary" style={{ position: 'relative', padding: '10px', border: '1px solid #ccc', borderRadius: '5px'}}>
 					<div ref={contentRef} style={{ maxHeight: '500px', overflowY: 'auto' }}>
 						<SyntaxHighlighter
 							language="markdown"
