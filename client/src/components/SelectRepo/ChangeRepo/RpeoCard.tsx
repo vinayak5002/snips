@@ -9,13 +9,12 @@ Modal.setAppElement('#root');
 
 type RepoCardProps = {
   repo: UserRepoPath;
-  key: number;
   selectedPath: string;
-  handleChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  handleChange: (event: ChangeEvent<HTMLInputElement>, repo: UserRepoPath) => void;
   handleDelete: (repoPath: string) => void;
 };
 
-const RepoCard = ({ repo, key, selectedPath, handleChange, handleDelete }: RepoCardProps) => {
+const RepoCard = ({ repo, selectedPath, handleChange, handleDelete }: RepoCardProps) => {
   const [modalIsOpen, setIsOpen] = useState(false);
 
   const openModal = () => setIsOpen(true);
@@ -59,14 +58,14 @@ const RepoCard = ({ repo, key, selectedPath, handleChange, handleDelete }: RepoC
         </div>
       </Modal>
 
-      <div key={key} className="flex flex-row items-center mb-2 w-full bg-secondary p-4 rounded-lg shadow-md cursor-pointer">
+      <div key={repo.path} className="flex flex-row items-center mb-2 w-full bg-secondary p-4 rounded-lg shadow-md cursor-pointer">
         <input
           type="radio"
           id={repo.path}
           name="repoPath"
           value={repo.path}
           checked={selectedPath === repo.path}
-          onChange={handleChange}
+          onChange={(event) => handleChange(event, repo)}
           className="hidden peer"
         />
         <label htmlFor={repo.path} className="flex items-center w-full cursor-pointer justify-between">

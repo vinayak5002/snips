@@ -4,15 +4,20 @@ import NewRepo from "../components/SelectRepo/NewRepo";
 import { UserRepoPath } from "../types/types";
 import snipsApi from "../api/snipsApi";
 import { ToastContainer } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { fetchCurrentRepo } from "../store/path/pathSlice";
+import { AppDispatch } from "../store/store";
 
 const SelectRepo = () => {
   const [userRepoPathList, setUserRepoPathList] = useState<UserRepoPath[]>([]);
+
+  const dispatch = useDispatch<AppDispatch>();
 
   const fetchUserRepoPathList = async () => {
     console.log("Fetching user repo path list");
     try {
       const data = await snipsApi.getSavedRepos();
-      console.log("User saved repos: ", data);
+      // console.log("User saved repos: ", data);
       const repoPathList = data;
       setUserRepoPathList(repoPathList);
     } catch (err) {
@@ -21,6 +26,7 @@ const SelectRepo = () => {
   };
 
   useEffect(() => {
+    dispatch(fetchCurrentRepo());
     fetchUserRepoPathList();
   }, []);
  

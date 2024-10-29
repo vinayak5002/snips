@@ -5,6 +5,9 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Oval } from "react-loader-spinner";
 import SearchResult from "../components/SearchResult";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../store/store";
+import { fetchCurrentRepo } from "../store/path/pathSlice";
 
 const SearchPage = () => {
   const [snips, setSnips] = useState<Snippet[]>([]);
@@ -12,6 +15,8 @@ const SearchPage = () => {
   const [isSearched, setIsSearched] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const inputRef = useRef<HTMLInputElement | null>(null);
+
+  const dispatch = useDispatch<AppDispatch>();
 
   const handleQuery = (e: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(e.target.value);
@@ -44,7 +49,7 @@ const SearchPage = () => {
   };
 
   useEffect(() => {
-    fetchData();
+    dispatch(fetchCurrentRepo());
   }, []);
 
   useEffect(() => {

@@ -10,10 +10,16 @@ const { checkIsDirectoryExists } = require("../utils/utils.js");
 const getCurrentRepo = (req, res) => {
   console.log("GET: /current-repo");
 
-  const currentRepo = snipsService.getCurrentRepo();
+  try {
+    const currentRepo = snipsService.getCurrentRepo();
 
-  console.log(currentRepo);
-  res.send(currentRepo);
+    console.log(currentRepo);
+    res.send(currentRepo);
+  }
+  catch (error) {
+    console.error("Error getting current repo: ", error);
+    return res.status(400).send(error.message);
+  }
 };
 
 const setCurrentRepo = (req, res) => {
@@ -28,11 +34,16 @@ const setCurrentRepo = (req, res) => {
   // Set new current repo
   const currentRepo = snipsService.updateCurrentRepoIndex(newRepoPath);
 
+  console.log("Current repo after updating: ", currentRepo);
+
   const newRepoPathIndex = snipsService.getCurrentRepoIndex();
 
   // Re-index repo if not indexed
   if (currentRepo.lastIndexed === null) {
+    console.log("Indexing repo")
     const { idfFileName, documentFileName } = snipUtils.getIndexedFileNames(newRepoPathIndex);
+    snipsService.updateRepoLastIndexedTime(newRepoPathIndex);
+
     snipUtils.reIndexRepo(currentRepo.path, idfFileName, documentFileName);
   }
 

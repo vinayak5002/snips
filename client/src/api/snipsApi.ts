@@ -51,11 +51,13 @@ async function getCurrentRepo() {
 
 async function setCurrentRepo(newRepoPath: string) {
   try {
+    console.log("Setting current repo path: ", newRepoPath);
     const response = await apiClient.post("/current-repo", {
       newRepoPath,
     });
     return response.data;
   } catch (error) {
+    console.log("Error setting current repo path: ", error);
     throw error;
   }
 }

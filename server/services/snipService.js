@@ -79,6 +79,7 @@ const updateCurrentRepoIndex = (newRepoPath) => {
 }
 
 const updateRepoLastIndexedTime = (repoIndex) => {
+	console.log("Updating last indexed time for repo: ", repoIndex);
 	const user = getUserObject();
 
 	user.repos[repoIndex].lastIndexed = new Date().toISOString();

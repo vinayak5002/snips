@@ -138,7 +138,7 @@ function searchDocuments(documents, idf, query, n = 3) {
       // Combine score with boost
       const finalScore = score + boost;
 
-      console.log(`Document: ${doc.filePath}, Score: ${score}, Boost: ${boost}, Final Score: ${finalScore}`);
+      // console.log(`Document: ${doc.filePath}, Score: ${score}, Boost: ${boost}, Final Score: ${finalScore}`);
 
       return {
           document: doc,

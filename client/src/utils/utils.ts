@@ -7,7 +7,9 @@ export function timeAgo(dateString: string): string {
   const pastDate = new Date(dateString);
   const seconds = Math.floor((now.getTime() - pastDate.getTime()) / 1000);
 
-  console.log("Last indexed x seconds ago: ", seconds);
+  // console.log("Last indexed x seconds ago: ", seconds);
+
+  if (Number.isNaN(seconds)) return "unknown";
 
   let interval: number;
 
@@ -31,6 +33,6 @@ export function timeAgo(dateString: string): string {
   if (interval > 1) return `${interval} mins ago`;
   if (interval === 1) return `1 min ago`;
 
-  return seconds < 5 ? "few seconds ago" : `${seconds} seconds ago`;
+  return seconds < 10 ? "few seconds ago" : "Less than a minute ago";
 }
 

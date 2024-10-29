@@ -4,14 +4,16 @@ import snipsApi from "../../api/snipsApi";
 type PathState = {
   path: string;
   lastIndexed: string;
+  loading: boolean;
+  error: string | null;
 };
 
-const savedCurrentRepoPath = localStorage.getItem("currentRepoPath");
-const savedLastIndexed = localStorage.getItem("lastIndexed");
 
 const initialState: PathState = {
-  path: savedCurrentRepoPath ? savedCurrentRepoPath : "",
-  lastIndexed: savedLastIndexed ? savedLastIndexed : "",
+  path: "Loading...",
+  lastIndexed: "",
+  loading: true,
+  error: null,
 };
 
 export const updateCurrentRepoPath = createAsyncThunk(
@@ -29,6 +31,26 @@ export const updateCurrentRepoPath = createAsyncThunk(
   }
 );
 
+export const fetchCurrentRepo = createAsyncThunk(
+  "currentRepoPath/fetchCurrentRepo",
+  async () => {
+    try {
+      const data = await snipsApi.getCurrentRepo();
+
+      console.log("Slice get current Repo: ", data);
+
+      const currentRepoPath = data.path;
+      const lastIndexed = data.lastIndexed;
+
+      return { currentRepoPath, lastIndexed };
+    }
+    catch (err) {
+      console.error("GET: Fetching user current repo path failed", err);
+      throw new Error("Failed to fetch current repo path");
+    }
+  }
+);
+
 const PathSlice = createSlice({
   name: "currentRepoPath",
   initialState,
@@ -40,8 +62,7 @@ const PathSlice = createSlice({
   },
 
   extraReducers: (builder) => {
-    builder.addCase(
-      updateCurrentRepoPath.fulfilled,
+    builder.addCase( updateCurrentRepoPath.fulfilled,
       (state: PathState, action: PayloadAction<PathState>) => {
         state.path = action.payload.path;
         state.lastIndexed = action.payload.lastIndexed;
@@ -49,12 +70,38 @@ const PathSlice = createSlice({
         console.log("POST: Updating user current repo path succeeded");
       }
     );
+
     builder.addCase(updateCurrentRepoPath.rejected, (state, action) => {
       console.error("Failed to update path", state.path, action.error);
     });
+
+    builder.addCase(updateCurrentRepoPath.pending, (state) => {
+      state.loading = true;
+      state.error = null;
+    });
+
+    builder.addCase(fetchCurrentRepo.fulfilled, (state, action) => {
+      console.log(
+        "Updating state: ", action.payload  
+      )
+      state.path = action.payload.currentRepoPath;
+      state.lastIndexed = action.payload.lastIndexed;
+      state.loading = false;
+      state.error = null;
+    });
+
+    builder.addCase(fetchCurrentRepo.rejected, (state, action) => {
+      
+      
+      state.loading = false;
+      state.error = action.error.message || "Failed to fetch current repo path";
+
+      state.path = "Not set";
+    });
+
   },
 });
 
-export const {setLastIndexed} = PathSlice.actions; // exporting of the reducers
+export const { setLastIndexed } = PathSlice.actions; // exporting of the reducers
 
 export default PathSlice.reducer;

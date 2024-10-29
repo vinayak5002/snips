@@ -27,8 +27,8 @@ function parseSnippetsFromFile(filePath) {
       stk.pop();
     }
 
-    console.log(stk);
-    console.log(header);
+    //console.log(stk);
+    //console.log(header);
     stk.push(newHeader);
   };
 
@@ -40,7 +40,7 @@ function parseSnippetsFromFile(filePath) {
 
   const getHeaderLine = () => {
     if (stk.length === 0) return ""; // Handle empty stack
-    console.log(stk[stk.length - 1]);
+    //console.log(stk[stk.length - 1]);
     return stk[stk.length - 1].lineNumber;
   };
 

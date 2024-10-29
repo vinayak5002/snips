@@ -1,5 +1,5 @@
 const data = {
-	"currentRepoIndex": 0,
+	"currentRepoIndex": -1,
 	"repos": [
 
 	]

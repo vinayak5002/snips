@@ -12,6 +12,8 @@ const Footer = () => {
 		(state: RootState) => state.currentRepoPath.lastIndexed,
 	);
 
+
+	
 	return (
 		<nav className="bg-secondary py-4 flex justify-between">
 			<div className="container mx-auto flex justify-between">

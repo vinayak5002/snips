@@ -1,8 +1,8 @@
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useEffect } from "react";
 import { UserRepoPath } from "../../types/types";
 import { useSelector, useDispatch } from "react-redux";
 import { AppDispatch, RootState } from "../../store/store";
-import { updateCurrentRepoPath } from "../../store/path/pathSlice";
+import { setLastIndexed, updateCurrentRepoPath } from "../../store/path/pathSlice";
 import snipsApi from "../../api/snipsApi";
 import { timeAgo } from "../../utils/utils";
 
@@ -24,17 +24,17 @@ const ChangeRepo = ({ pathList, refreshPathList }: ChangeRepoProps) => {
     (state: RootState) => state.currentRepoPath.lastIndexed
   );
 
-  const [selectedPath, setSelectedPath] = useState(currentRepoPath);
+  // const [selectedPath, setSelectedPath] = useState(currentRepoPath);
 
   const dispatch = useDispatch<AppDispatch>();
 
-  const handleRepoChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleRepoChange = (event: ChangeEvent<HTMLInputElement>, repo: UserRepoPath) => {
     const { value } = event.target;
-    setSelectedPath(value);
+    // setSelectedPath(value);
 
     dispatch(updateCurrentRepoPath(value));
-
-    snipsApi.setCurrentRepo(value);
+    dispatch(setLastIndexed(repo.lastIndexed));
+    // snipsApi.setCurrentRepo(value);
   }
 
   const handleDeleteRepo = async (path: string) => {
@@ -74,11 +74,10 @@ const ChangeRepo = ({ pathList, refreshPathList }: ChangeRepoProps) => {
       <h2 className="mb-2 text-3xl">From saved repos: </h2>
 
       {
-        pathList.map((ele, idx) => (
+        pathList.map((ele) => (
           <RepoCard
             repo={ele}
-            key={idx}
-            selectedPath={selectedPath}
+            selectedPath={currentRepoPath}
             handleChange={handleRepoChange}
             handleDelete={handleDeleteRepo}
           />
