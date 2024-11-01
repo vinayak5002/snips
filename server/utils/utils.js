@@ -3,6 +3,7 @@ const { readDirectoryRecursive } = require("./fileUtils");
 const { calculateIDF } = require("./tf-idf");
 const templates = require("../constants/templates");
 const path = require("path");
+const crypto = require("crypto");
 
 const ensureDirectoryExists = (dir) => {
   if (!fs.existsSync(dir)) {
@@ -38,7 +39,7 @@ const ensureDataExists = () => {
   console.log("Data file already exists");
 }
 
-const reIndexRepo = (repoPath, idfFileName, documentFileName) => {
+const reIndexRepo = async (repoPath, idfFileName, documentFileName) => {
   // get the documents in the repo
   documentList = readDirectoryRecursive(repoPath, repoPath);
 
@@ -56,20 +57,27 @@ const reIndexRepo = (repoPath, idfFileName, documentFileName) => {
   fs.writeFileSync(documentFileName, JSON.stringify(documentList, null, 2));
 }
 
-const getIndexedFileNames = (repoId) => {
+const getIndexedFileNames = (folderPath) => {
+
+  // Normalize the folder path
+  const normalizedPath = path.normalize(folderPath);
+
+  // Create a hash of the folder path
+  const hash = crypto.createHash('sha256').update(normalizedPath).digest('hex');
+
 
   const idfFileName = path.join(
     __dirname,
     "../idfs",
-    `idf-${repoId}.json`
+    `idf-${hash}.json`
   );
   const documentFileName = path.join(
     __dirname,
     "../documents",
-    `documents-${repoId}.json`
+    `documents-${hash}.json`
   );
 
-  return {idfFileName, documentFileName};
+  return { idfFileName, documentFileName };
 }
 
 const deleteIndexedFiles = (repoId) => {

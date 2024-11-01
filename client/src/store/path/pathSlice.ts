@@ -90,13 +90,11 @@ const PathSlice = createSlice({
       state.error = null;
     });
 
-    builder.addCase(fetchCurrentRepo.rejected, (state, action) => {
-      
-      
+    builder.addCase(fetchCurrentRepo.rejected, (state, action) => { 
+      state.path = "Not set";
+
       state.loading = false;
       state.error = action.error.message || "Failed to fetch current repo path";
-
-      state.path = "Not set";
     });
 
   },

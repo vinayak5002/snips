@@ -22,7 +22,7 @@ const getCurrentRepo = (req, res) => {
   }
 };
 
-const setCurrentRepo = (req, res) => {
+const setCurrentRepo = async (req, res) => {
   console.log("POST: /current-repo", req.body);
 
   const { newRepoPath } = req.body;
@@ -41,10 +41,14 @@ const setCurrentRepo = (req, res) => {
   // Re-index repo if not indexed
   if (currentRepo.lastIndexed === null) {
     console.log("Indexing repo")
-    const { idfFileName, documentFileName } = snipUtils.getIndexedFileNames(newRepoPathIndex);
-    snipsService.updateRepoLastIndexedTime(newRepoPathIndex);
+    const { idfFileName, documentFileName } = snipUtils.getIndexedFileNames(snipsService.getCurrentRepo().path);
+    const updatedLastIndexedRepo = await snipsService.updateRepoLastIndexedTime(newRepoPathIndex);
 
-    snipUtils.reIndexRepo(currentRepo.path, idfFileName, documentFileName);
+    await snipUtils.reIndexRepo(currentRepo.path, idfFileName, documentFileName);
+
+    console.log("Updated last indexed repo: ", updatedLastIndexedRepo);
+    res.send(updatedLastIndexedRepo);
+    return;
   }
 
   console.log("Updated current repo: ", currentRepo);
@@ -70,7 +74,7 @@ const searchSnips = (req, res) => {
   const repoId = snipsService.getCurrentRepoIndex();
 
   // Get indexed files
-  const { idfFileName, documentFileName } = snipUtils.getIndexedFileNames(repoId);
+  const { idfFileName, documentFileName } = snipUtils.getIndexedFileNames(snipsService.getCurrentRepo().path);
 
   // Get the idfs and document list
   const idf = JSON.parse(fs.readFileSync(idfFileName, "utf8"));
@@ -89,7 +93,7 @@ const reindexDocuments = (req, res) => {
   const repoId = snipsService.getCurrentRepoIndex();
 
   // file paths for saving idf and document list
-  const { idfFileName, documentFileName } = snipUtils.getIndexedFileNames(repoId);
+  const { idfFileName, documentFileName } = snipUtils.getIndexedFileNames(snipsService.getCurrentRepo().path);
 
   // Get the current repo path
   const currentRepoPath = snipsService.getCurrentRepo().path;

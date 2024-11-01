@@ -78,7 +78,7 @@ const updateCurrentRepoIndex = (newRepoPath) => {
 	return getCurrentRepo();
 }
 
-const updateRepoLastIndexedTime = (repoIndex) => {
+const updateRepoLastIndexedTime = async (repoIndex) => {
 	console.log("Updating last indexed time for repo: ", repoIndex);
 	const user = getUserObject();
 
