@@ -46,7 +46,7 @@ export const fetchCurrentRepo = createAsyncThunk(
     }
     catch (err) {
       console.error("GET: Fetching user current repo path failed", err);
-      throw new Error("Failed to fetch current repo path");
+      // throw new Error("Failed to fetch current repo path");
     }
   }
 );
@@ -84,8 +84,8 @@ const PathSlice = createSlice({
       console.log(
         "Updating state: ", action.payload  
       )
-      state.path = action.payload.currentRepoPath;
-      state.lastIndexed = action.payload.lastIndexed;
+      state.path = action.payload?.currentRepoPath || "Not set";
+      state.lastIndexed = action.payload?.lastIndexed || "";
       state.loading = false;
       state.error = null;
     });

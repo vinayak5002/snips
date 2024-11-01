@@ -14,6 +14,10 @@ const getCurrentRepo = (req, res) => {
     const currentRepo = snipsService.getCurrentRepo();
 
     console.log(currentRepo);
+    if (!currentRepo) {
+      return res.status(404).send("Current repo not found");
+    }
+    
     res.send(currentRepo);
   }
   catch (error) {

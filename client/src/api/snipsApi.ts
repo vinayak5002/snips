@@ -43,6 +43,7 @@ async function getSavedRepos() {
 async function getCurrentRepo() {
   try {
     const response = await apiClient.get("/current-repo");
+    console.log("API: Current repo: ", response.data);
     return response.data;
   } catch (error) {
     throw error;
