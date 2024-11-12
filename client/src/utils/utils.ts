@@ -17,7 +17,7 @@ export function timeAgo(dateString: string): string {
   if (interval > 1) return `${interval} years ago`;
   if (interval === 1) return `1 year ago`;
 
-  interval = Math.floor(seconds / 2592000); // months
+  interval = Math.floor(seconds / 2592000); // month
   if (interval > 1) return `${interval} months ago`;
   if (interval === 1) return `1 month ago`;
 

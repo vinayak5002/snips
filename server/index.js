@@ -3,7 +3,7 @@ const cors = require("cors");
 const path = require("path");
 const { ensureDirectoryExists, ensureDataExists } = require("./utils/utils");
 const app = express();
-const port = 5000;
+const port = process.env.PORT || 4999;
 
 // Basic CORS configuration
 app.use(cors());
