@@ -1,0 +1,22 @@
+{
+  "name": "snips",
+  "version": "1.0.0",
+  "description": "Browse your brain",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "install": "echo \"Installing server dependencies\" && cd server && npm install && echo \"Installing client dependencies\" && cd ../client && npm install && echo \"Building client\" && npm run build",
+    "update": "git pull && cd client && npm run build",
+    "snips": "cd server && npm run start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:vinayak5002/snips.git"
+  },
+  "author": "vinayak5002",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vinayak5002/snips/issues"
+  },
+  "homepage": "https://github.com/vinayak5002/snips#readme"
+}
