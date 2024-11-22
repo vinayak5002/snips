@@ -10,6 +10,7 @@ import Navbar from "./sections/navBar";
 import Footer from "./sections/footer";
 import snipsApi from "./api/snipsApi";
 import { AxiosError } from "axios";
+import HistoryPage from "./pages/History";
 
 
 function RepoHandler() {
@@ -60,6 +61,7 @@ function App() {
                 <Route path="/" element={<RepoHandler />} />
                 <Route path="/search" element={<SearchPage />} />
                 <Route path="/select-repo" element={<SelectRepoPage />} />
+                <Route path="/history" element={<HistoryPage />} />
               </Routes>
             </main>
             <Footer /> {/* Footer stays at the bottom */}

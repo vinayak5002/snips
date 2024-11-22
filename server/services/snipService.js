@@ -1,8 +1,8 @@
 const fs = require("fs");
 const path = require("path");
-const { dataFileName } = require("../constants/constants");
+const { dataFileName, historyFileName } = require("../constants/constants");
 const { deleteIndexedFiles } = require("../utils/utils");
-const { error } = require("console");
+const { error, timeStamp, clear } = require("console");
 
 const getUserObject = () => {
 	const data = fs.readFileSync(path.join(__dirname, "..", dataFileName), "utf8");
@@ -11,10 +11,24 @@ const getUserObject = () => {
 	return user;
 }
 
+const getHistoryObject = () => {
+	const data = fs.readFileSync(path.join(__dirname, "..", historyFileName), "utf8");
+	const history = JSON.parse(data);
+
+	return history;
+}
+
 const saveUserObject = (user) => {
 	fs.writeFileSync(
 		path.join(__dirname, "..", dataFileName),
 		JSON.stringify(user, null, 2)
+	);
+}
+
+const saveHistoryObject = (history) => {
+	fs.writeFileSync(
+		path.join(__dirname, "..", historyFileName),
+		JSON.stringify(history, null, 2)
 	);
 }
 
@@ -113,6 +127,32 @@ const removeRepo = (repoPath) => {
 	return deleteRepo;
 }
 
+const addHistoryRecord = (query) => {
+	const history = getHistoryObject();
+	
+	const historyRecord = {
+		query: query,
+		timeStamp: new Date().toISOString(),
+	}
+
+	history.history.push(historyRecord);
+
+	saveHistoryObject(history);
+}
+
+const getHistory = () => {
+	const history = getHistoryObject();
+
+	return history.history;
+}
+
+const clearHistory = () => {
+	const history = getHistoryObject();
+
+	history.history = [];
+	saveHistoryObject(history);
+}
+
 module.exports = {
 	getCurrentRepo,
 	getCurrentRepoIndex,
@@ -120,5 +160,8 @@ module.exports = {
 	getSavedRepos,
 	updateCurrentRepoIndex,
 	updateRepoLastIndexedTime,
-	removeRepo
+	removeRepo,
+	addHistoryRecord,
+	getHistory,
+	clearHistory
 };

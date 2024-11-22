@@ -39,6 +39,19 @@ const ensureDataExists = () => {
   console.log("Data file already exists");
 }
 
+const ensureHistoryExists = () => {
+  historyPath = path.join(__dirname, "../", "history.json");
+
+  if (!fs.existsSync(historyPath)) {
+    fs.writeFileSync(historyPath, JSON.stringify(templates.history, null, 2));
+    console.log("History file created");
+
+    return;
+  }
+
+  console.log("History file already exists");
+}
+
 const reIndexRepo = async (repoPath, idfFileName, documentFileName) => {
   // get the documents in the repo
   documentList = readDirectoryRecursive(repoPath, repoPath);
@@ -93,5 +106,6 @@ module.exports = {
   reIndexRepo,
   getIndexedFileNames,
   ensureDataExists,
+  ensureHistoryExists,
   deleteIndexedFiles
 };

@@ -5,6 +5,13 @@ const data = {
 	]
 }
 
+const history = {
+	history: [
+
+	]
+}
+
 module.exports = {
-	data
+	data,
+	history
 }

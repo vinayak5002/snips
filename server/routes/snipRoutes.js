@@ -14,5 +14,7 @@ router.get("/check-repo-path", snipsController.checkRepoPath);
 router.post("/add-repo", snipsController.addRepo);
 router.get("/get-file", snipsController.getFile);
 router.delete("/delete-repo", snipsController.removeRepo);
+router.get("/history", snipsController.getHistory);
+router.delete("/history", snipsController.clearHistory);
 
 module.exports = router;

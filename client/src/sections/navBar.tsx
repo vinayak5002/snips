@@ -36,8 +36,16 @@ const Navbar = () => {
 	return (
 		<nav className="bg-primary py-4">
 			<div className="container mx-auto flex justify-between items-center">
-				<div onClick={() => { navigator("/") }} className="text-white font-bold text-4xl"><span>S</span></div>
+				<div onClick={() => { navigator("/") }} className="text-white font-bold text-4xl cursor-pointer"><span>S</span></div>
 				<ul className="flex space-x-4 items-center">
+					<li>
+						<a
+						 	href="/history"
+							className="flex items-center text-white bg-secondary hover:bg-black px-3 py-2 rounded"
+						>
+						History
+						</a>
+					</li>
 					<li>
 						<a
 							className="flex items-center text-white bg-secondary hover:bg-black px-3 py-2 rounded"

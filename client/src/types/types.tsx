@@ -15,4 +15,9 @@ type UserRepoPath = {
   lastIndexed: string
 };
 
-export type { Snippet, UserRepoPath};
+type HistoryRecord = {
+  query: string;
+  timeStamp: Date;
+}
+
+export type { Snippet, UserRepoPath, HistoryRecord};

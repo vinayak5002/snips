@@ -6,6 +6,7 @@ const snipUtils = require("../utils/utils.js");
 
 const { searchDocuments } = require("../utils/tf-idf.js");
 const { checkIsDirectoryExists } = require("../utils/utils.js");
+const { clear } = require("console");
 
 const getCurrentRepo = (req, res) => {
   console.log("GET: /current-repo");
@@ -74,9 +75,6 @@ const searchSnips = (req, res) => {
   const { query } = req.query;
   console.log(query);
 
-  // Get the current repo index
-  const repoId = snipsService.getCurrentRepoIndex();
-
   // Get indexed files
   const { idfFileName, documentFileName } = snipUtils.getIndexedFileNames(snipsService.getCurrentRepo().path);
 
@@ -86,6 +84,9 @@ const searchSnips = (req, res) => {
 
   // search the documents
   const results = searchDocuments(documentList, idf, query);
+
+  // add record to history
+  snipsService.addHistoryRecord(query);
 
   res.send(results);
 };
@@ -179,6 +180,20 @@ const removeRepo = (req, res) => {
   }
 }
 
+const getHistory = (req, res) => {
+  console.log("GET: /history");
+
+  const history = snipsService.getHistory();
+  res.send(history);
+}
+
+const clearHistory = (req, res) => {
+  console.log("POST: /clear-history");
+
+  snipsService.clearHistory();
+  res.send(snipsService.getHistory());
+}
+
 module.exports = {
   getCurrentRepo,
   setCurrentRepo,
@@ -188,5 +203,7 @@ module.exports = {
   checkRepoPath,
   addRepo,
   getFile,
-  removeRepo
+  removeRepo,
+  getHistory,
+  clearHistory
 };

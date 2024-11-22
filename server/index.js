@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const path = require("path");
-const { ensureDirectoryExists, ensureDataExists } = require("./utils/utils");
+const { ensureDirectoryExists, ensureDataExists, ensureHistoryExists } = require("./utils/utils");
 const app = express();
 const port = process.env.PORT || 4999;
 
@@ -38,6 +38,7 @@ function init() {
   ensureDirectoryExists(dir2);
 
   ensureDataExists();
+  ensureHistoryExists();
 }
 
 app.listen(port, () => {

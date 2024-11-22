@@ -1,3 +1,4 @@
+import { HistoryRecord } from "../types/types";
 import { apiClient } from "./client";
 
 async function searchSnips(query: string) {
@@ -115,6 +116,32 @@ async function deleteRepo(repoPath: string) {
   }
 }
 
+async function fetchHistory(): Promise<HistoryRecord[]>{
+  try {
+    const response = await apiClient.get("/history");
+
+    const historyList: HistoryRecord[] = response.data.map((record: any) => {
+      return {
+        query: record.query,
+        timeStamp: new Date(record.timeStamp)
+      }
+    });
+    
+    return historyList;
+  } catch (error) {
+    throw error;
+  }
+}
+
+async function clearHistory() {
+  try {
+    const response = await apiClient.delete("/history");
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+}
+
 export default {
   searchSnips,
   getSavedSnips,
@@ -125,5 +152,7 @@ export default {
   checkRepoPath,
   addRepoPath,
   getFileContent,
-  deleteRepo
+  deleteRepo,
+  fetchHistory,
+  clearHistory
 };
