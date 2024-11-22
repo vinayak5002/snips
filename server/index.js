@@ -3,7 +3,9 @@ const cors = require("cors");
 const path = require("path");
 const { ensureDirectoryExists, ensureDataExists, ensureHistoryExists } = require("./utils/utils");
 const app = express();
-const port = process.env.PORT || 4999;
+require('dotenv').config();  
+
+const PORT = process.env.PORT || 3000;
 
 // Basic CORS configuration
 app.use(cors());
@@ -41,7 +43,7 @@ function init() {
   ensureHistoryExists();
 }
 
-app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}`);
+app.listen(PORT, () => {
+  console.log(`Server running at http://localhost:${PORT}`);
   init();
 });

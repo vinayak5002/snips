@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 import snipsApi from "../../api/snipsApi";
 import { UserRepoPath } from "../../types/types";
 import Modal from "react-modal";
-import customStyles from "../../constatnts/styles";
+import customStyles from "../../constants/styles";
 
 Modal.setAppElement('#root');
 

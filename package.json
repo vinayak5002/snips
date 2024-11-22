@@ -6,8 +6,11 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "install": "echo \"Installing server dependencies\" && cd server && npm install && echo \"Installing client dependencies\" && cd ../client && npm install && echo \"Building client\" && npm run build",
-    "update": "git pull && cd client && npm run build",
-    "snips": "cd server && npm run start"
+    "update": "cd client && npm run build",
+    "snips": "node ./scripts/start-server.js"
+  },
+  "bin": {
+    "snips": "snips.js"
   },
   "repository": {
     "type": "git",

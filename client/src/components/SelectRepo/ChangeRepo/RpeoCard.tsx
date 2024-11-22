@@ -3,7 +3,7 @@ import { UserRepoPath } from "../../../types/types";
 import { timeAgo } from "../../../utils/utils";
 import { MdDeleteForever } from "react-icons/md";
 import Modal from "react-modal";
-import customStyles from "../../../constatnts/styles";
+import customStyles from "../../../constants/styles";
 
 Modal.setAppElement('#root');
 
