@@ -1,6 +1,8 @@
 import axios from "axios";
 
-const PORT = process.env.PORT || 3000;
+const PORT = import.meta.env.VITE_PORT;
+
+console.log("PORT: ", PORT);
 
 export const apiClient = axios.create({
   baseURL: `http://localhost:${PORT}/api`,
