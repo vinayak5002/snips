@@ -10,7 +10,7 @@ import Navbar from "./sections/navBar";
 import Footer from "./sections/footer";
 import snipsApi from "./api/snipsApi";
 import { AxiosError } from "axios";
-import HistoryPage from "./pages/History";
+import HistoryPage from "./pages/HistoryPage";
 
 
 function RepoHandler() {

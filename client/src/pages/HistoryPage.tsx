@@ -5,9 +5,12 @@ import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { fetchCurrentRepo } from "../store/path/pathSlice";
 import { AppDispatch } from "../store/store";
+import { useNavigate } from "react-router-dom";
 
 
 const HistoryPage = () => {
+  const navigate = useNavigate();
+
   const [historyList, setHistory] = useState<HistoryRecord[]>([]);
 
   const dispatch = useDispatch<AppDispatch>();
@@ -15,7 +18,7 @@ const HistoryPage = () => {
   const fetchHistory = async () => {
     const history: HistoryRecord[] = await snipsApi.fetchHistory();
     console.log(history)
-    setHistory(history);
+    setHistory(history.reverse().slice(0, 20));
   }
 
   const clearHistory = async () => {
@@ -44,11 +47,23 @@ const HistoryPage = () => {
         </a>
 
       </div>
-      <div className="mt-4">
+      <div className="m-auto mt-4 w-[60%]">
         {historyList.map((record, index) => (
-          <div key={index} className="border-b border-gray-300 py-2">
-            <p className="text-lg">{record.query}</p>
-            <p className="text-sm text-gray-500">{record.timeStamp.toDateString()}</p>
+          <div key={index} className="border-b border-gray-300 py-4 flex justify-between">
+            <div>
+              <p className="text-lg">{record.query}</p>
+              <p className="text-sm text-gray-500">{record.timeStamp.toDateString()}</p>
+            </div>
+            <button>
+              <a
+                className="text-white bg-secondary hover:bg-black px-3 py-2 rounded"
+                onClick={() => {
+                  navigate(`/search?query=${record.query}`);
+                }}
+              >
+                Search again
+              </a>
+            </button>
           </div>
         ))}
       </div>

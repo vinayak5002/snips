@@ -8,6 +8,7 @@ import SearchResult from "../components/SearchResult";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../store/store";
 import { fetchCurrentRepo } from "../store/path/pathSlice";
+import { useLocation } from "react-router-dom";
 
 const SearchPage = () => {
   const [snips, setSnips] = useState<Snippet[]>([]);
@@ -17,6 +18,10 @@ const SearchPage = () => {
   const inputRef = useRef<HTMLInputElement | null>(null);
 
   const dispatch = useDispatch<AppDispatch>();
+
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const routeQuery = queryParams.get('query');
 
   const handleQuery = (e: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(e.target.value);
@@ -48,7 +53,17 @@ const SearchPage = () => {
     fetchData();
   };
 
+  // useEffect(() => {
+  //   if (routeQuery) {
+  //     setQuery(routeQuery);
+  //     fetchData();
+  //   }
+  // }, []);
+
   useEffect(() => {
+    if (routeQuery) {
+      setQuery(routeQuery);
+    }
     dispatch(fetchCurrentRepo());
   }, []);
 
