@@ -129,5 +129,44 @@ function readDirectoryRecursive(dir, rootPath, endsWith = ["md"]) {
   return results;
 }
 
+const checkFileChanges = (directoryPath, timestamp) => {
+  // Convert the timestamp to a Date object for comparison
+  const timestampDate = new Date(timestamp);
+
+  // Read the files and subdirectories in the directory
+  fs.readdir(directoryPath, (err, files) => {
+    if (err) {
+      console.error('Error reading directory:', err);
+      return;
+    }
+
+    // Loop through each file/subdirectory
+    files.forEach((file) => {
+      const filePath = path.join(directoryPath, file);
+
+      // Get the stats of the file or directory
+      fs.stat(filePath, (err, stats) => {
+        if (err) {
+          console.error('Error fetching file stats:', err);
+          return;
+        }
+
+        // If it's a directory, recurse into it
+        if (stats.isDirectory()) {
+          checkFileChanges(filePath, timestamp); // Recursively check inside subdirectories
+        } else {
+          // Check if the file was modified after the provided timestamp
+          if (stats.mtime > timestampDate) {
+            console.log(`File changed: ${filePath}, Modified at: ${stats.mtime}`);
+            return true;
+          }
+        }
+      });
+    });
+  });
+
+  return false;
+}
+
 // Export both functions
-module.exports = { parseSnippetsFromFile, readDirectoryRecursive };
+module.exports = { parseSnippetsFromFile, readDirectoryRecursive, checkFileChanges};

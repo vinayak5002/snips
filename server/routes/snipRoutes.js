@@ -16,5 +16,6 @@ router.get("/get-file", snipsController.getFile);
 router.delete("/delete-repo", snipsController.removeRepo);
 router.get("/history", snipsController.getHistory);
 router.delete("/history", snipsController.clearHistory);
+router.get("/check-for-updates", snipsController.checkForUpdates);
 
 module.exports = router;

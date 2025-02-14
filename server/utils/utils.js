@@ -93,8 +93,8 @@ const getIndexedFileNames = (folderPath) => {
   return { idfFileName, documentFileName };
 }
 
-const deleteIndexedFiles = (repoId) => {
-  const { idfFileName, documentFileName } = getIndexedFileNames(repoId);
+const deleteIndexedFiles = (repoPath) => {
+  const { idfFileName, documentFileName } = getIndexedFileNames(repoPath);
 
   fs.unlinkSync(idfFileName);
   fs.unlinkSync(documentFileName);

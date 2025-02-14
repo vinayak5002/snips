@@ -44,7 +44,7 @@ async function getSavedRepos() {
 async function getCurrentRepo() {
   try {
     const response = await apiClient.get("/current-repo");
-    console.log("API: Current repo: ", response.data);
+    // console.log("API: Current repo: ", response.data);
     return response.data;
   } catch (error) {
     throw error;
@@ -53,7 +53,7 @@ async function getCurrentRepo() {
 
 async function setCurrentRepo(newRepoPath: string) {
   try {
-    console.log("Setting current repo path: ", newRepoPath);
+    // console.log("Setting current repo path: ", newRepoPath);
     const response = await apiClient.post("/current-repo", {
       newRepoPath,
     });
@@ -66,7 +66,7 @@ async function setCurrentRepo(newRepoPath: string) {
 
 async function checkRepoPath(repoPath: string) {
   try {
-    console.log("Checking path: ", repoPath);
+    // console.log("Checking path: ", repoPath);
     const response = await apiClient.get("/check-repo-path", {
       params: {
         repoPath: repoPath,
@@ -142,6 +142,15 @@ async function clearHistory() {
   }
 }
 
+async function checkForUpdates() {
+  try {
+    const response = await apiClient.get("/check-for-updates");
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+}
+
 export default {
   searchSnips,
   getSavedSnips,
@@ -154,5 +163,6 @@ export default {
   getFileContent,
   deleteRepo,
   fetchHistory,
-  clearHistory
+  clearHistory,
+  checkForUpdates
 };

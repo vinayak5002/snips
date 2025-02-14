@@ -116,7 +116,7 @@ const removeRepo = (repoPath) => {
 		throw new Error("Cannot delete current repo");
 	}
 
-	deleteIndexedFiles(repoIndex);
+	deleteIndexedFiles(repoPath);
 
 	const deleteRepo = user.repos[repoIndex];
 

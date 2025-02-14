@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { TailSpin } from "react-loader-spinner";
 import snipsApi from "../api/snipsApi";
 import { useLocation, useNavigate } from "react-router-dom";
 import { AppDispatch } from "../store/store";
 import { useDispatch } from "react-redux";
 import { setLastIndexed } from "../store/path/pathSlice";
+import { toast } from "react-toastify";
 
 
 
@@ -32,6 +33,28 @@ const Navbar = () => {
 		setLoading(false);
 		// window.location.reload();
 	}
+ 
+	const checkForUpdates = async () => {
+		console.log("Checking for updates")
+		try {
+			const isUpdated = await snipsApi.checkForUpdates();
+			console.log("Updated: ", isUpdated);
+
+			if (isUpdated) {
+				toast.warn("Changes detected in repo, Re-indexing in process")
+        		await reIndexRepo();
+				toast.success("Current repo re-indexed");
+			}
+
+		}
+		catch (error) {
+			console.error("Error checking for updates", error);
+		}
+	}
+
+	useEffect(() => {
+		checkForUpdates();
+	}, [])
 
 	return (
 		<nav className="bg-primary py-4">
