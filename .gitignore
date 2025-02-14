@@ -7,3 +7,4 @@ server/documents
 server/idfs
 
 server/data.json
+server/history.json
