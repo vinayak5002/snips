@@ -1,10 +1,12 @@
 node_modules
+package-lock.json
 
 client/node_modules
+client/package-lock.json
 
 server/node_modules
+server/package-lock.json
 server/documents
 server/idfs
-
 server/data.json
 server/history.json
