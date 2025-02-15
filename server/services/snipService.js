@@ -51,7 +51,6 @@ const getCurrentRepo = () => {
 
 	const returnObj = user.repos[user.currentRepoIndex];
 
-	console.log("return object: ", returnObj);
 	return returnObj
 }
 

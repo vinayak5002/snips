@@ -4,7 +4,7 @@ const path = require("path");
 const snipsService = require("../services/snipService.js");
 const snipUtils = require("../utils/utils.js");
 
-const { checkFileChanges } = require("../utils/fileUtils.js")
+const { checkFileChanges } = require("../utils/asyncFileUtils.js");
 const { searchDocuments } = require("../utils/tf-idf.js");
 const { checkIsDirectoryExists } = require("../utils/utils.js");
 const { clear } = require("console");
@@ -195,14 +195,16 @@ const clearHistory = (req, res) => {
   res.send(snipsService.getHistory());
 }
 
-const checkForUpdates = (req, res) => {
+const checkForUpdates = async (req, res) => {
   const currentRepo = snipsService.getCurrentRepo();
 
   if (!currentRepo) {
     return res.status(404).send("Current repo not found");
   }
 
-  const isChanged = checkFileChanges(currentRepo.path, currentRepo.lastIndexed);
+  console.log("Checking for updates in: ", currentRepo.path);
+
+  const isChanged = await checkFileChanges(currentRepo.path, currentRepo.lastIndexed);
   console.log("Is changed: ", isChanged);
 
   res.send(isChanged);

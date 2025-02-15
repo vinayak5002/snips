@@ -7,6 +7,7 @@ const checkFileChanges = async (directoryPath, timestamp) => {
     const timestampDate = new Date(timestamp);
 
     // Read the files and subdirectories in the directory
+    console.log("Checking for file changes in", directoryPath);
     const files = await fs.readdir(directoryPath);
 
     for (const file of files) {
@@ -32,8 +33,4 @@ const checkFileChanges = async (directoryPath, timestamp) => {
   }
 };
 
-// Usage example
-(async () => {
-  const result = await checkFileChanges('C:\\Users\\91988\\OneDrive\\Documents\\Obsidian\\punk_records', Date.now() - 2 * 24 * 60 * 60 * 1000);
-  console.log(result); // true or false
-})();
+module.exports = { checkFileChanges };
