@@ -4,14 +4,13 @@ import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
 import SearchPage from "./pages/SearchPage";
 import { store, AppDispatch } from "./store/store";
 import { useDispatch } from "react-redux";
-import { fetchCurrentRepo, setLastIndexed } from "./store/path/pathSlice";
+import { fetchCurrentRepo } from "./store/path/pathSlice";
 import SelectRepoPage from "./pages/SelectRepoPage";
 import Navbar from "./sections/navBar";
 import Footer from "./sections/footer";
 import snipsApi from "./api/snipsApi";
 import { AxiosError } from "axios";
 import HistoryPage from "./pages/HistoryPage";
-import { toast } from "react-toastify";
 
 
 function RepoHandler() {
@@ -45,7 +44,7 @@ function RepoHandler() {
   useEffect(() => {
     dispatch(fetchCurrentRepo());
     checkCurrentRepo();
-  }, [dispatch]);
+  });
 
   return null;
 }
