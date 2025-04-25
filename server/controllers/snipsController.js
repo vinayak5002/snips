@@ -17,14 +17,14 @@ const getCurrentRepo = (req, res) => {
 
     console.log(currentRepo);
     if (!currentRepo) {
-      return res.status(404).send("Current repo not found");
+      return res.status(400).send("Current repo not found");
     }
     
     res.send(currentRepo);
   }
   catch (error) {
     console.error("Error getting current repo: ", error);
-    return res.status(400).send(error.message);
+    return res.status(500).send(error.message);
   }
 };
 
